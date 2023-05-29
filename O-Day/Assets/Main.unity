@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: 657243779}
   - component: {fileID: 657243778}
   - component: {fileID: 657243777}
+  - component: {fileID: 657243780}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -469,6 +470,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &657243780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657243776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ec64769ebf019d478a4609b96c8eab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1533137391}
+  damping: 0.125
+  offset: {x: 0, y: 0, z: -2}
 --- !u!1 &692887076
 GameObject:
   m_ObjectHideFlags: 0
@@ -1024,9 +1040,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 9
-  walkAcceleration: 75
-  airAcceleration: 30
-  groundDeceleration: 70
   playerBulletPrefab: {fileID: 2187740654245750407, guid: 4e65ec254b7c17447a5d330231acfa7f,
     type: 3}
   jumpforce: 20
