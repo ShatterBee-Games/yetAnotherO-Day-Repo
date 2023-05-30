@@ -8,7 +8,7 @@ public class hearts : MonoBehaviour
 {
     public int health;
 
-[SerializeField, Tooltip("Max 8")]
+    [SerializeField, Tooltip("Max 8")]
     public int numOfHearts;
 
     public Image[] heartArray;
@@ -18,27 +18,17 @@ public class hearts : MonoBehaviour
     void Update()
     {
 
-        if(health > numOfHearts){
-            health = numOfHearts;
-        }
+       //optimized -zoe
 
-
-
+        health = Mathf.Min(health, numOfHearts);
 
         for (int i = 0; i < heartArray.Length; i++)
         {
-            if(i < health){
-                heartArray[i].sprite = fullHeart;
-            } else {
-                heartArray[i].sprite = emptyHeart;
-            }
-
-            if(i < numOfHearts){
-                heartArray[i].enabled = true;
-            } else {
-                heartArray[i].enabled = false;
-            }
+            heartArray[i].sprite = i < health ? fullHeart : emptyHeart;
+            heartArray[i].enabled = i < numOfHearts;
         }
+
+
     }
 
 
