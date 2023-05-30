@@ -59,6 +59,20 @@ public class CharacterController2D : MonoBehaviour
 
     private float nextFire = 0.0f;
 
+// added coyote Jump and Jump buffer -zoe
+
+/*
+
+explination: Coyote Jump and Jump Buffer allows for lee way when jumping too late or too  early 
+this intern makes the player experince feel alot more smooth.
+
+*/
+    private float coyoteTime = 0.2f;
+    private float coyoteTimeCounter;
+
+    private float jumpBuffer = 0.2f;
+    private float jumpBufferCounter;
+
 
     private void Awake()
     {      
@@ -75,7 +89,14 @@ public class CharacterController2D : MonoBehaviour
     private void FixedUpdate()
     {   
 
-         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
+
+        if(isGrounded)
+        {
+            coyoteTimeCounter = coyoteTime;
+        } else {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
 
         
         //use GetAxisRaw for more Snappy movement if desired -zoe
@@ -101,20 +122,36 @@ public class CharacterController2D : MonoBehaviour
 
         // new jump function -zoe /////
 
-          if (isGrounded == true)
+          if (coyoteTimeCounter > 0f)
         {
             extraJumps = extraJumpValue;
            
         }
     
-          
-            if(Input.GetButtonDown("Jump") && extraJumps > 0){
+
+            if(jumpBufferCounter > 0f && extraJumps > 0){
 
                 rb.velocity = Vector2.up * jumpforce;
                 extraJumps--;
-            } else if(Input.GetButtonDown("Jump") && extraJumps == 0 && isGrounded == true)
+            } else if(jumpBufferCounter > 0f && extraJumps == 0 && isGrounded == true)
             {
                 rb.velocity = Vector2.up * jumpforce;
+            }
+
+            if(Input.GetButtonUp("Jump")){
+
+               coyoteTimeCounter = 0f;
+               jumpBufferCounter = 0f;
+            }
+
+
+            if (Input.GetButtonDown("Jump")){
+
+                jumpBufferCounter = jumpBuffer;
+
+            }else 
+            {
+                jumpBufferCounter -= Time.deltaTime;
             }
 
             
