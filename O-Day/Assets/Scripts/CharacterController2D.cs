@@ -46,8 +46,8 @@ public class CharacterController2D : MonoBehaviour
     public LayerMask whatIsGround;
 
     private bool facingRight = true;
-    //////////////////////////////////////////////////
 
+    //////////////////////////////////////////////////
 
     private BoxCollider2D boxCollider;
 

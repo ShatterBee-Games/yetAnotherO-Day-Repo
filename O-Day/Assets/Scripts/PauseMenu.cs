@@ -34,38 +34,7 @@ public class PauseMenu : MonoBehaviour
     Time.timeScale = time; - then we just connect time to Time.timeScale
 
     hope this helps zoe <3 
-
-
-    ///////////// REMOVED ///////////////////////////
-
-     if (Input.GetKeyDown(KeyCode.Escape)){
-
-        if (pauseDisplay)
-        {
-                pauseOff();
-        } else
-        {
-                pauseOn();
-        }
-
-    }
-    }
-
-        //Feel free to edit this code and leave behind a comment of what I should've done instead (Shane)
-        public void pauseOn()
-        {
-            pauseUI.SetActive(true);
-            pauseDisplay = true;
-            Time.timeScale = 0f;
-        }
-        public void pauseOff()
-        {
-            pauseUI.SetActive(false);
-            pauseDisplay = false;
-            Time.timeScale = 1f;
-        }
-    ///////////////////////////////////////////////////
-    */
+*/
 
 
 }
