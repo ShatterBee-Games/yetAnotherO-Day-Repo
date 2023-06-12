@@ -20,4 +20,8 @@ public class StartMenuScript : MonoBehaviour
     {
         SceneManager.LoadScene(1); //starts the game (Shane)
     }
+    public void EndGame()
+    {
+        Application.Quit();
+    }
 }
