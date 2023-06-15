@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: db261ed09f1bf754da40a23e4dafe010
+guid: 9c185e50b95266241b951c67254202be
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - stompPrefab: {fileID: 3660319033138439423, guid: 750d759fa8f168d4d8298d58d934b349,
-      type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
