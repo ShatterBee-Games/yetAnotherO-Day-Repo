@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class CharacterController2D : MonoBehaviour
@@ -185,6 +186,17 @@ public class CharacterController2D : MonoBehaviour
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
         transform.localScale = Scaler;
+    }
+
+    void OnTriggerEnter2D(Collider2D other){
+        Debug.Log("fuck");
+        hearts healthController =  GetComponent<hearts>();
+        if(healthController.health <= 1 ){
+            SceneManager.LoadScene(0);
+        }
+        else {
+            healthController.health--;
+        }
     }
 
 

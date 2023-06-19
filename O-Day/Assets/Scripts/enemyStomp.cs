@@ -9,7 +9,7 @@ public class enemyStomp : MonoBehaviour
     //vector2 is a 2d vector class that contains an x and y coordinate
     public Vector2 initPosition; 
 
-    public float maxDistance = 5f;
+    float maxDistance = 10f;
     bool destroy = false;
 
 

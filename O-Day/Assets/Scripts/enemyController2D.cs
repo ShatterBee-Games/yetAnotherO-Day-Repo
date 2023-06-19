@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[System.Serializable]
+public class spawnLocation{
+    public Transform position;
+    public Vector3 step;
+
+}
+
 public class enemyController2D : MonoBehaviour
 {
     public float health = 200f;
@@ -9,23 +17,71 @@ public class enemyController2D : MonoBehaviour
     [SerializeField, Tooltip("Prefab for stomp")]
     GameObject stompPrefab;
 
+    [SerializeField, Tooltip("Prefab for projectile")]
+    GameObject projectilePrefab;
+
     [SerializeField, Tooltip("Position for stomp")]
     List<Transform> listStompPosition;
+
+    [SerializeField, Tooltip("Position for projectile")]
+    List<spawnLocation> listProjectileLocation;
+
+    [SerializeField, Tooltip("Player Position")]
+    Transform playerPosition;
+
+    Vector3 step;
+    int projectileLocationIndex;
+    Transform projectilePosition;  
+    int bulletsToSpawn;
+
+    [SerializeField, Tooltip("bullet spawn num")]
+    int bulletsToSpawnMax = 3;
+
+    float bulletTimer;
+
+    [SerializeField, Tooltip("bullet spawn delay")]
+    float bulletTimerMax= 0.5f;
+
+    float attackTimer;
+
+    [SerializeField, Tooltip("attack timer maximum delay")]
+    float attackTimerMax= 6.0f;
+
+    [SerializeField, Tooltip("attack timer minimum delay")]
+    float attackTimerMin= 1.6f;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        attackTimer = Random.Range(attackTimerMin, attackTimerMax);
     }
 
     // Update is called once per frame
     void Update()
-    {
-        if (Input.GetButtonDown("Jump")){
-            SpawnStomp();
+    {   
+        attackTimer -= Time.deltaTime;
+
+        if ( attackTimer <0 ){
+            attackTimer = Random.Range(attackTimerMin, attackTimerMax);
+            float chance = Random.Range(0.0f, 1.0f);
+            if(chance > 0.5f){
+                SpawnStomp();
+            }
+            else {
+                startSpawn();
+            }
         }
 
+        if (bulletsToSpawn > 0){
+            bulletTimer -= Time.deltaTime;
+            if(bulletTimer <= 0){
+                SpawnBullets(bulletsToSpawnMax - bulletsToSpawn);
+                bulletsToSpawn--;
+                bulletTimer = bulletTimerMax;
+            }
+        }
 
+        
         
     }
 
@@ -55,6 +111,28 @@ public class enemyController2D : MonoBehaviour
         stomp.velocity = new Vector2(-xspeed, 0.0f);
         stompcode = stompGameObject.GetComponent<enemyStomp>();
         stompcode.initPosition = stomp.position; 
+        attackTimer += 2.0f;
+    }
+
+    public void startSpawn(){
+        projectileLocationIndex = Random.Range(0,listProjectileLocation.Count);
+        spawnLocation projectileLocation = listProjectileLocation[projectileLocationIndex];
+        projectilePosition = projectileLocation.position;
+        step = projectileLocation.step;
+        bulletsToSpawn = bulletsToSpawnMax;
+        bulletTimer = bulletTimerMax;
+        attackTimer += 3.0f;
+    }
+
+
+
+    public void SpawnBullets(int i){
+
+        GameObject projectileGameObject = Instantiate(projectilePrefab, projectilePosition.position+step*i, Quaternion.identity);
+        enemyBullet projectilecode = projectileGameObject.GetComponent<enemyBullet>();
+        projectilecode.playerPosition = playerPosition;
+
+        
     }
 
 }
