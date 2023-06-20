@@ -10,13 +10,6 @@ public class enemyBullet : MonoBehaviour
     float waitTime = 2.0f;
     bool fired = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {   
         waitTime -= Time.deltaTime;
@@ -24,11 +17,15 @@ public class enemyBullet : MonoBehaviour
             fired = true;
             shootTowardsPlayer();
         }
-        
 
+        //optimized -zoe
+        destroy = transform.position.x > 30 || transform.position.x < -30 || transform.position.y > 20 || transform.position.y < -20;
+        
+        /*
         if (transform.position.x > 30 || transform.position.x < -30 || transform.position.y > 20 || transform.position.y < -20) {
             destroy = true;
         }
+        */
 
 
         //MUST BE LAST THING YOU DO IN CODE
@@ -45,13 +42,14 @@ public class enemyBullet : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = direction*xspeed ;
 
     }
-
-    // void OnCollisionEnter2D(Collision2D C){
-    //     GameObject other = C.gameObject;
-    //     if (other.layer == 6){
-    //         enemyController2D enemy = other.GetComponent<enemyController2D>();
-    //         enemy.TakeDamage(damage);
-    //     }
-    //     destroy = true;
-    // }
+/*
+     void OnCollisionEnter2D(Collision2D C){
+         GameObject other = C.gameObject;
+         if (other.layer == 6){
+            enemyController2D enemy = other.GetComponent<enemyController2D>();
+             enemy.TakeDamage(damage);
+         }
+        destroy = true;
+     }
+*/
 }

@@ -8,21 +8,18 @@ public class playerBulletBehaviour : MonoBehaviour
     float damage = 5;
     bool destroy = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {   
         
+        //optimized -zoe
+        destroy = transform.position.x > 30 || transform.position.x < -30;
         
-
+        /*
         if (transform.position.x > 30 || transform.position.x < -30) {
             destroy = true;
         }
+        */
 
 
         //MUST BE LAST THING YOU DO IN CODE
