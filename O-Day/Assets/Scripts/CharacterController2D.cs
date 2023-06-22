@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class CharacterController2D : MonoBehaviour
 {
     [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
-    float speed = 15;
+    float speed = 20;
     /*
         [SerializeField, Tooltip("Acceleration while grounded.")]
         float walkAcceleration = 35;
@@ -74,6 +74,10 @@ public class CharacterController2D : MonoBehaviour
     private float jumpBuffer = 0.2f;
     private float jumpBufferCounter;
 
+    float damageTime;
+
+    [SerializeField, Tooltip("Immortality after damage taken time")]
+    float damageTimeMax = 1.0f;
 
     private void Awake()
     {
@@ -114,7 +118,11 @@ public class CharacterController2D : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+        if (damageTime > 0f){
+            damageTime -= Time.deltaTime;
+        }
+
 
 
         // new jump function -zoe /////
@@ -188,14 +196,17 @@ public class CharacterController2D : MonoBehaviour
         transform.localScale = Scaler;
     }
 
-    void OnTriggerEnter2D(Collider2D other){
-        Debug.Log("fuck");
-        hearts healthController =  GetComponent<hearts>();
-        if(healthController.health <= 1 ){
-            SceneManager.LoadScene(0);
-        }
-        else {
-            healthController.health--;
+    void OnTriggerStay2D(Collider2D other){
+        if (damageTime<=0){
+            damageTime = damageTimeMax;
+            Debug.Log("fuck");
+            hearts healthController =  GetComponent<hearts>();
+            if(healthController.health <= 1 ){
+                SceneManager.LoadScene(0);
+            }
+            else {
+                healthController.health--;
+            }
         }
     }
 

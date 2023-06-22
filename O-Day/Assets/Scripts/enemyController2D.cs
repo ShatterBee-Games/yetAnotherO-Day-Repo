@@ -20,11 +20,20 @@ public class enemyController2D : MonoBehaviour
     [SerializeField, Tooltip("Prefab for projectile")]
     GameObject projectilePrefab;
 
+    [SerializeField, Tooltip("Prefab for laser")]
+    GameObject laserPrefab;
+
     [SerializeField, Tooltip("Position for stomp")]
     List<Transform> listStompPosition;
 
     [SerializeField, Tooltip("Position for projectile")]
     List<spawnLocation> listProjectileLocation;
+
+    [SerializeField, Tooltip("Position for laser top")]
+    Transform laserTopLocation;
+
+    [SerializeField, Tooltip("Position for laser bottom")]
+    Transform laserBottomLocation;
 
     [SerializeField, Tooltip("Player Position")]
     Transform playerPosition;
@@ -63,9 +72,12 @@ public class enemyController2D : MonoBehaviour
 
         if ( attackTimer <0 ){
             attackTimer = Random.Range(attackTimerMin, attackTimerMax);
-            float chance = Random.Range(0.0f, 1.0f);
-            if(chance > 0.5f){
+            float chance = Random.Range(0.0f, 3.0f);
+            if(chance > 2f){
                 SpawnStomp();
+            }
+            else if (chance > 1f){
+                spawnLaser();
             }
             else {
                 startSpawn();
@@ -80,6 +92,7 @@ public class enemyController2D : MonoBehaviour
                 bulletTimer = bulletTimerMax;
             }
         }
+
 
         
         
@@ -133,6 +146,17 @@ public class enemyController2D : MonoBehaviour
         projectilecode.playerPosition = playerPosition;
 
         
+    }
+
+    public void spawnLaser(){
+        
+        GameObject laserGameObject = Instantiate(laserPrefab, laserTopLocation.position, Quaternion.identity);
+        Rigidbody2D laser = laserGameObject.GetComponent<Rigidbody2D>();
+        //spawn second one
+        laserGameObject = Instantiate(laserPrefab, laserBottomLocation.position, Quaternion.identity);
+        laser = laserGameObject.GetComponent<Rigidbody2D>();
+        attackTimer += 3.0f;
+
     }
 
 }

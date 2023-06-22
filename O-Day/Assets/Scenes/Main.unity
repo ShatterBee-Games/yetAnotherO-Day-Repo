@@ -129,6 +129,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1130212403}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &78857732
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 78857733}
+  m_Layer: 6
+  m_Name: laserBottom
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &78857733
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78857732}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.298, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 16232965}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &106898292
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +187,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 106898292}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.315, y: -0.087, z: 0.72}
+  m_LocalPosition: {x: 0.3446, y: -0.087, z: 0.72}
   m_LocalScale: {x: 0.09034, y: 0.57432544, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -257,8 +288,11 @@ MonoBehaviour:
   health: 200
   stompPrefab: {fileID: 0}
   projectilePrefab: {fileID: 0}
+  laserPrefab: {fileID: 0}
   listStompPosition: []
   listProjectileLocation: []
+  laserTopLocation: {fileID: 0}
+  laserBottomLocation: {fileID: 0}
   playerPosition: {fileID: 0}
   bulletsToSpawnMax: 3
   bulletTimerMax: 0.25
@@ -467,7 +501,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 351167495}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.31, y: 0.145, z: 0.72}
+  m_LocalPosition: {x: -0.3463, y: -0.088, z: 0.72}
   m_LocalScale: {x: 0.09034, y: 0.57432544, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -568,8 +602,11 @@ MonoBehaviour:
   health: 200
   stompPrefab: {fileID: 0}
   projectilePrefab: {fileID: 0}
+  laserPrefab: {fileID: 0}
   listStompPosition: []
   listProjectileLocation: []
+  laserTopLocation: {fileID: 0}
+  laserBottomLocation: {fileID: 0}
   playerPosition: {fileID: 0}
   bulletsToSpawnMax: 3
   bulletTimerMax: 0.25
@@ -856,8 +893,11 @@ MonoBehaviour:
   health: 200
   stompPrefab: {fileID: 0}
   projectilePrefab: {fileID: 0}
+  laserPrefab: {fileID: 0}
   listStompPosition: []
   listProjectileLocation: []
+  laserTopLocation: {fileID: 0}
+  laserBottomLocation: {fileID: 0}
   playerPosition: {fileID: 0}
   bulletsToSpawnMax: 3
   bulletTimerMax: 0.25
@@ -1302,8 +1342,11 @@ MonoBehaviour:
   health: 200
   stompPrefab: {fileID: 0}
   projectilePrefab: {fileID: 0}
+  laserPrefab: {fileID: 0}
   listStompPosition: []
   listProjectileLocation: []
+  laserTopLocation: {fileID: 0}
+  laserBottomLocation: {fileID: 0}
   playerPosition: {fileID: 0}
   bulletsToSpawnMax: 3
   bulletTimerMax: 0.25
@@ -1538,7 +1581,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ff8a3908659e070429f89ac626fcc0df, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0c1d6f3761128cc478796c2888299e41, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1997,6 +2040,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9047503468690831621, guid: 100f470a2103fb043b05cb42fa3cad1e,
         type: 3}
+      propertyPath: laserPrefab
+      value: 
+      objectReference: {fileID: 6950360773340495427, guid: 294e8c1c721a6ae4f991ad9c36675eaf,
+        type: 3}
+    - target: {fileID: 9047503468690831621, guid: 100f470a2103fb043b05cb42fa3cad1e,
+        type: 3}
       propertyPath: stompPrefab
       value: 
       objectReference: {fileID: 3660319033138439423, guid: 750d759fa8f168d4d8298d58d934b349,
@@ -2018,10 +2067,20 @@ PrefabInstance:
       objectReference: {fileID: 1533137391}
     - target: {fileID: 9047503468690831621, guid: 100f470a2103fb043b05cb42fa3cad1e,
         type: 3}
+      propertyPath: laserTopLocation
+      value: 
+      objectReference: {fileID: 1569184180}
+    - target: {fileID: 9047503468690831621, guid: 100f470a2103fb043b05cb42fa3cad1e,
+        type: 3}
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 5247130102181759458, guid: b118215d9a5862b4fafa504d04dbefd2,
         type: 3}
+    - target: {fileID: 9047503468690831621, guid: 100f470a2103fb043b05cb42fa3cad1e,
+        type: 3}
+      propertyPath: laserBottomLocation
+      value: 
+      objectReference: {fileID: 78857733}
     - target: {fileID: 9047503468690831621, guid: 100f470a2103fb043b05cb42fa3cad1e,
         type: 3}
       propertyPath: listStompPosition.Array.size
@@ -2349,7 +2408,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.011799365, y: 0}
+  m_Offset: {x: -0.023250751, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2360,7 +2419,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.69321567, y: 1.5}
+  m_Size: {x: 0.4916774, y: 1.5}
   m_EdgeRadius: 0
 --- !u!4 &1533137391
 Transform:
@@ -2394,14 +2453,15 @@ MonoBehaviour:
   speed: 9
   playerBulletPrefab: {fileID: 2187740654245750407, guid: 4e65ec254b7c17447a5d330231acfa7f,
     type: 3}
-  jumpforce: 20
-  extraJumpValue: 0
+  jumpforce: 22
+  extraJumpValue: 1
   groundCheck: {fileID: 164902142}
   checkRadius: 0.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
   fireRate: 0.2
+  damageTimeMax: 0.5
 --- !u!50 &1533137393
 Rigidbody2D:
   serializedVersion: 4
@@ -2448,6 +2508,37 @@ MonoBehaviour:
   - {fileID: 788903052}
   fullHeart: {fileID: 21300000, guid: 50e315f595c57394fb3a25e44f07abf6, type: 3}
   emptyHeart: {fileID: 21300000, guid: a86e72d204e28664d9e7c9e54d965716, type: 3}
+--- !u!1 &1569184179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1569184180}
+  m_Layer: 6
+  m_Name: laserTop
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1569184180
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569184179}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.199, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 16232965}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1635422940
 GameObject:
   m_ObjectHideFlags: 0
