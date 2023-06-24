@@ -202,7 +202,7 @@ public class CharacterController2D : MonoBehaviour
             Debug.Log("fuck");
             hearts healthController =  GetComponent<hearts>();
             if(healthController.health <= 1 ){
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(2);
             }
             else {
                 healthController.health--;
