@@ -47,6 +47,7 @@ public class enemyLaser : MonoBehaviour
             warnSprite.SetActive(false);
             laserOn = true;
             GetComponent<Collider2D>().enabled = true;
+            transform.Translate(0.0001f,0f,0f);
         }
 
         if (laserOn){
