@@ -1,12 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; //allows script to manage scene
 
 
 [System.Serializable]
 public class spawnLocation{
     public Transform position;
     public Vector3 step;
+
+}
+
+[System.Serializable]
+public class modeAttacks{
+    public List<Transform> listStompPosition;
+    public List<spawnLocation> listProjectileLocation;
 
 }
 
@@ -23,11 +31,30 @@ public class enemyController2D : MonoBehaviour
     [SerializeField, Tooltip("Prefab for laser")]
     GameObject laserPrefab;
 
-    [SerializeField, Tooltip("Position for stomp")]
-    List<Transform> listStompPosition;
+    //this is where we do the left right center switching
+    [SerializeField, Tooltip("list of attack modes")]
+    List<modeAttacks> attackModes;
+    
+    //hey go away don't touch the constants (I have a knife) -kayli
+    const int MODE_LEFT = 0;
+    const int MODE_RIGHT = 1;
+    const int MODE_CENTER = 2;
+    //pspspsps go away from those constants pspsps
 
-    [SerializeField, Tooltip("Position for projectile")]
-    List<spawnLocation> listProjectileLocation;
+    int mode;
+
+    [SerializeField, Tooltip("health transition value right")]
+    float rightSwap = 170f;
+
+    [SerializeField, Tooltip("health transition value center")]
+    float centerSwap = 140f;
+
+    [SerializeField, Tooltip("health transition value phase2")]
+    float p2Swap = 100f;
+
+    [SerializeField, Tooltip("list of boss location sprites")]
+    List<GameObject> bossSprites;
+    
 
     [SerializeField, Tooltip("Position for laser top")]
     Transform laserTopLocation;
@@ -63,11 +90,30 @@ public class enemyController2D : MonoBehaviour
     void Start()
     {
         attackTimer = Random.Range(attackTimerMin, attackTimerMax);
+        mode = MODE_LEFT;
     }
 
     // Update is called once per frame
     void Update()
     {   
+
+        if (mode == MODE_LEFT && health <= rightSwap){
+            mode = MODE_RIGHT;
+            bossSprites[MODE_LEFT].SetActive(false);
+            bossSprites[MODE_RIGHT].SetActive(true);
+        } 
+
+        if (mode == MODE_RIGHT && health <= centerSwap){
+            mode = MODE_CENTER;
+            bossSprites[MODE_RIGHT].SetActive(false);
+            bossSprites[MODE_CENTER].SetActive(true);
+        } 
+
+        if (mode == MODE_CENTER && health <= p2Swap){
+             SceneManager.LoadScene(4);
+        } 
+
+
         attackTimer -= Time.deltaTime;
 
         if ( attackTimer <0 ){
@@ -104,30 +150,33 @@ public class enemyController2D : MonoBehaviour
     }
 
 
-    //Its going to put a ArgumentOutOfRangeException for now because the legs have the same script tied to them
-    //doesn't intefere with anything for now, but could be fixed with making the legs children of the enemy body
-    //ignore it for now, when the animations and hitboxes come in a fix should make itself apparent
-    //-Kayli
+
     public void SpawnStomp(){
-        int stompPositionIndex = Random.Range(0,listStompPosition.Count);
-        Transform stompPosition = listStompPosition[stompPositionIndex];
-        GameObject stompGameObject = Instantiate(stompPrefab, stompPosition.position, Quaternion.identity);
-        Rigidbody2D stomp = stompGameObject.GetComponent<Rigidbody2D>();
-        float xspeed;
-        xspeed = 5.0f;
-        stomp.velocity = new Vector2(xspeed, 0.0f);
-        enemyStomp stompcode = stompGameObject.GetComponent<enemyStomp>();
-        stompcode.initPosition = stomp.position; 
-        //spawning second one
-        stompGameObject = Instantiate(stompPrefab, stompPosition.position, Quaternion.identity);
-        stomp = stompGameObject.GetComponent<Rigidbody2D>();
-        stomp.velocity = new Vector2(-xspeed, 0.0f);
-        stompcode = stompGameObject.GetComponent<enemyStomp>();
-        stompcode.initPosition = stomp.position; 
+        List<Transform> listStompPosition = attackModes[mode].listStompPosition;
+        
+        for (int stompPositionIndex = 0; stompPositionIndex < listStompPosition.Count; stompPositionIndex++){
+            Transform stompPosition = listStompPosition[stompPositionIndex];
+            GameObject stompGameObject = Instantiate(stompPrefab, stompPosition.position, Quaternion.identity);
+            Rigidbody2D stomp = stompGameObject.GetComponent<Rigidbody2D>();
+            float xspeed;
+            xspeed = 5.0f;
+            stomp.velocity = new Vector2(xspeed, 0.0f);
+            enemyStomp stompcode = stompGameObject.GetComponent<enemyStomp>();
+            stompcode.initPosition = stomp.position; 
+            //spawning second one
+            stompGameObject = Instantiate(stompPrefab, stompPosition.position, Quaternion.identity);
+            stomp = stompGameObject.GetComponent<Rigidbody2D>();
+            stomp.velocity = new Vector2(-xspeed, 0.0f);
+            stompcode = stompGameObject.GetComponent<enemyStomp>();
+            stompcode.initPosition = stomp.position; 
+        }
+
         attackTimer += 2.0f;
     }
 
     public void startSpawn(){
+         List<spawnLocation> listProjectileLocation = attackModes[mode].listProjectileLocation;
+
         projectileLocationIndex = Random.Range(0,listProjectileLocation.Count);
         spawnLocation projectileLocation = listProjectileLocation[projectileLocationIndex];
         projectilePosition = projectileLocation.position;

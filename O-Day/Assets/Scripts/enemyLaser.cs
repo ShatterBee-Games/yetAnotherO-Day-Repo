@@ -64,13 +64,5 @@ public class enemyLaser : MonoBehaviour
         }
     }
 
-    //Deduct health code I'll do it later -Kayli
-    // void OnCollisionEnter2D(Collision2D C){
-    //     GameObject other = C.gameObject;
-    //     if (other.layer == 6){
-    //         enemyController2D enemy = other.GetComponent<enemyController2D>();
-    //         enemy.TakeDamage(damage);
-    //     }
-    //     destroy = true;
-    // }
+
 }

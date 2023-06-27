@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class enemyBullet : MonoBehaviour
 {
-    float damage = 5;
+    
     bool destroy = false;
     public Transform playerPosition;
     float waitTime = 2.0f;
@@ -42,14 +42,9 @@ public class enemyBullet : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = direction*xspeed ;
 
     }
-/*
+
      void OnCollisionEnter2D(Collision2D C){
-         GameObject other = C.gameObject;
-         if (other.layer == 6){
-            enemyController2D enemy = other.GetComponent<enemyController2D>();
-             enemy.TakeDamage(damage);
-         }
         destroy = true;
      }
-*/
+
 }
