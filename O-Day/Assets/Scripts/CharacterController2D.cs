@@ -60,6 +60,16 @@ public class CharacterController2D : MonoBehaviour
 
     private float nextFire = 0.0f;
 
+    int bulletCount = 0;
+
+    [SerializeField, Tooltip("maximum bullets per case")]
+    int bulletCountMax = 5;
+
+    float reloadTimer = 0f;
+
+    [SerializeField, Tooltip("reload time")]
+    float reloadTimeerMax = 1.5f;
+
     // added coyote Jump and Jump buffer -zoe
 
     /*
@@ -87,6 +97,14 @@ public class CharacterController2D : MonoBehaviour
 
         // added Rigidbody2D as rb for more ctrl? -zoe
         rb = GetComponent<Rigidbody2D>();
+
+        bulletCount = bulletCountMax;
+
+        bulletCounter bulletUI =  GetComponent<bulletCounter>();
+        bulletUI.bullets = bulletCount;
+        // bulletUI.reloadBar.enabled = false;
+
+
 
     }
 
@@ -123,6 +141,16 @@ public class CharacterController2D : MonoBehaviour
             damageTime -= Time.deltaTime;
         }
 
+        if (reloadTimer > 0f){
+            reloadTimer -= Time.deltaTime;
+            bulletCounter bulletUI =  GetComponent<bulletCounter>();
+            bulletUI.progress = reloadTimer/reloadTimeerMax;
+            if (reloadTimer <= 0f){
+            bulletCount = bulletCountMax;
+            bulletUI.bullets = bulletCount;
+            // bulletUI.reloadBar.enabled = false;
+            }
+        }
 
 
         // new jump function -zoe /////
@@ -162,19 +190,19 @@ public class CharacterController2D : MonoBehaviour
         /////////////////////////
 
     
-        if (Input.GetMouseButton(1) && (Time.time > nextFire))
-        {
-            GameObject bulletGameObject = Instantiate(playerBulletPrefab, transform.position, transform.rotation);
-            Rigidbody2D bullet = bulletGameObject.GetComponent<Rigidbody2D>();
-            float xspeed;
-            // if facing right shoot right if facing left shoot left -zoe
-            xspeed = !facingRight ? -20.0f : 20.0f;
-            bullet.velocity = new Vector2(xspeed, 0.0f);
-            nextFire = Time.time + fireRate;
-        }
+        // if (Input.GetMouseButton(1) && (Time.time > nextFire))
+        // {
+        //     GameObject bulletGameObject = Instantiate(playerBulletPrefab, transform.position, transform.rotation);
+        //     Rigidbody2D bullet = bulletGameObject.GetComponent<Rigidbody2D>();
+        //     float xspeed;
+        //     // if facing right shoot right if facing left shoot left -zoe
+        //     xspeed = !facingRight ? -20.0f : 20.0f;
+        //     bullet.velocity = new Vector2(xspeed, 0.0f);
+        //     nextFire = Time.time + fireRate;
+        // }
 
         //kept second mouse button dont know if you guys still need it -zoe
-        if (Input.GetMouseButton(0) && (Time.time > nextFire))
+        if (Input.GetMouseButton(0) && (Time.time > nextFire) && bulletCount > 0)
         {
             GameObject bulletGameObject = Instantiate(playerBulletPrefab, transform.position, transform.rotation);
             Rigidbody2D bullet = bulletGameObject.GetComponent<Rigidbody2D>();
@@ -183,6 +211,14 @@ public class CharacterController2D : MonoBehaviour
             xspeed = !facingRight ? -20.0f : 20.0f;
             bullet.velocity = new Vector2(xspeed, 0.0f);
             nextFire = Time.time + fireRate;
+            bulletCount--;
+            bulletCounter bulletUI =  GetComponent<bulletCounter>();
+            bulletUI.bullets = bulletCount;
+            if (bulletCount <= 0){
+                reloadTimer = reloadTimeerMax;
+                // bulletUI.reloadBar.enabled = true;
+
+            }
         }
     }
 
@@ -196,7 +232,7 @@ public class CharacterController2D : MonoBehaviour
         transform.localScale = Scaler;
     }
 
-    void OnTriggerStay2D(Collider2D other){
+    void ProcessDamage(){
         if (damageTime<=0){
             damageTime = damageTimeMax;
             Debug.Log("fuck");
@@ -208,6 +244,14 @@ public class CharacterController2D : MonoBehaviour
                 healthController.health--;
             }
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D other){
+        ProcessDamage();
+    }
+
+    void OnTriggerStay2D(Collider2D other){
+        ProcessDamage();
     }
 
 

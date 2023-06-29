@@ -5,7 +5,7 @@ using UnityEngine;
 public class enemyBullet : MonoBehaviour
 {
     
-    bool destroy = false;
+    public bool destroy = false;
     public Transform playerPosition;
     float waitTime = 2.0f;
     bool fired = false;
@@ -18,14 +18,13 @@ public class enemyBullet : MonoBehaviour
             shootTowardsPlayer();
         }
 
-        //optimized -zoe
-        destroy = transform.position.x > 30 || transform.position.x < -30 || transform.position.y > 20 || transform.position.y < -20;
         
-        /*
+        
+        //dont optimize before checking if it breaks on collision destroy -kayli
         if (transform.position.x > 30 || transform.position.x < -30 || transform.position.y > 20 || transform.position.y < -20) {
             destroy = true;
         }
-        */
+        
 
 
         //MUST BE LAST THING YOU DO IN CODE
@@ -43,8 +42,11 @@ public class enemyBullet : MonoBehaviour
 
     }
 
-     void OnCollisionEnter2D(Collision2D C){
-        destroy = true;
-     }
+    void OnTriggerEnter2D(Collider2D C){
+        GameObject other = C.gameObject;
+        if (other.layer == 7){
+            destroy = true;
+        }
+    }
 
 }

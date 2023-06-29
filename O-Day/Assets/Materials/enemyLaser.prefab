@@ -268,3 +268,4 @@ MonoBehaviour:
   warnSprite: {fileID: 1676216559256461999}
   laserSprite: {fileID: 5713464448407834008}
   switchTimeMax: 2
+  fireTime: 0.25
