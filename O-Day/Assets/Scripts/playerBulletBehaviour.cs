@@ -12,14 +12,14 @@ public class playerBulletBehaviour : MonoBehaviour
     void Update()
     {   
         
-        //optimized -zoe
-        destroy = transform.position.x > 30 || transform.position.x < -30;
+        //optimized -zoe (unoptimized again because it overrides the destroy = true for collision)
+        //destroy = transform.position.x > 30 || transform.position.x < -30;
         
-        /*
+        
         if (transform.position.x > 30 || transform.position.x < -30) {
             destroy = true;
         }
-        */
+        
 
 
         //MUST BE LAST THING YOU DO IN CODE

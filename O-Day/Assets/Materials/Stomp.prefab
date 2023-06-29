@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 7621305993549557798}
   m_Layer: 0
   m_Name: Stomp
-  m_TagString: Untagged
+  m_TagString: enemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,4 +180,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initPosition: {x: 0, y: 0}
-  maxDistance: 5

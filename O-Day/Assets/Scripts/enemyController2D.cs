@@ -175,7 +175,7 @@ public class enemyController2D : MonoBehaviour
     }
 
     public void startSpawn(){
-         List<spawnLocation> listProjectileLocation = attackModes[mode].listProjectileLocation;
+        List<spawnLocation> listProjectileLocation = attackModes[mode].listProjectileLocation;
 
         projectileLocationIndex = Random.Range(0,listProjectileLocation.Count);
         spawnLocation projectileLocation = listProjectileLocation[projectileLocationIndex];
