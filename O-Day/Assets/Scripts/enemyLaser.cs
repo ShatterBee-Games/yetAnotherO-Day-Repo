@@ -10,7 +10,7 @@ public class enemyLaser : MonoBehaviour
     [SerializeField, Tooltip("laser sprite")]
     GameObject laserSprite;
 
-   
+
     bool destroy = false;
     bool laserOn = false;
     float switchTime;
@@ -21,48 +21,68 @@ public class enemyLaser : MonoBehaviour
     [SerializeField, Tooltip("time laser is fired")]
     float fireTime = 0.35f;
 
+    bool st;
+
 
     // Start is called before the first frame update
     void Start()
     {
         switchTime = switchTimeMax;
         SpriteRenderer warnRenderer = warnSprite.GetComponent<SpriteRenderer>();
-        warnRenderer.color = new Color(1f,1f,1f,0.1f);
+        warnRenderer.color = new Color(1f, 1f, 1f, 0.1f);
     }
 
-    // Update is called once per frame
+   // optimized -zoe
     void Update()
-    {   
-    
+    {
         switchTime -= Time.deltaTime;
 
-        if(switchTime > 0f){
-            float opacity = (switchTimeMax - switchTime)/switchTimeMax;
-            SpriteRenderer warnRenderer = warnSprite.GetComponent<SpriteRenderer>();
-            warnRenderer.color = new Color(1f,1f,1f,opacity);
+        st = switchTime > 0f ? true : false;
+
+        if (st)
+        {
+            stg();
+        }
+        else
+        {
+            stl();
         }
 
-        if (switchTime < 0f){
-            laserSprite.SetActive(true);
-            warnSprite.SetActive(false);
-            laserOn = true;
-            GetComponent<Collider2D>().enabled = true;
-            transform.Translate(0.0001f,0f,0f);
-        }
-
-        if (laserOn){
+        if (laserOn)
+        {
             fireTime -= Time.deltaTime;
-            if (fireTime < 0f){
-                destroy = true;
-            }
+            destroy = fireTime < 0f ? true : false;
         }
-
 
         //MUST BE LAST THING YOU DO IN CODE
-        if (destroy){
+        if (destroy)
+        {
             Destroy(gameObject);
         }
     }
 
+    //switch time greater
+    void stg()
+    {
+        float opacity = (switchTimeMax - switchTime) / switchTimeMax;
+        SpriteRenderer warnRenderer = warnSprite.GetComponent<SpriteRenderer>();
+        warnRenderer.color = new Color(1f, 1f, 1f, opacity);
+    }
 
+    //switch time less
+    void stl()
+    {
+        laserSprite.SetActive(true);
+        warnSprite.SetActive(false);
+        laserOn = true;
+        GetComponent<Collider2D>().enabled = true;
+        transform.Translate(0.0001f, 0f, 0f);
+    }
 }
+
+
+
+
+
+
+

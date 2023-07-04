@@ -13,13 +13,6 @@ public class enemyStomp : MonoBehaviour
     bool destroy = false;
 
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {   
@@ -37,7 +30,7 @@ public class enemyStomp : MonoBehaviour
         }
     }
 
-    //Deduct health code I'll do it later -Kayli
+    //Deduct health code I'll do it later -Kayli   good luck  -zoe <333 
     // void OnCollisionEnter2D(Collision2D C){
     //     GameObject other = C.gameObject;
     //     if (other.layer == 6){

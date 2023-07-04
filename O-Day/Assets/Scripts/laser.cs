@@ -19,14 +19,19 @@ public class laser : MonoBehaviour
 
     void ShootLaser()
     {
-        if (Physics2D.Raycast(m_Transform.position, transform.right))
+        //optimized zoe
+        RaycastHit2D hit;
+        Vector3 firePointPosition = laserFirePoint.position;
+        Vector3 rightDirection = transform.right;
+        
+        if (Physics2D.RaycastNonAlloc(m_Transform.position, rightDirection, new RaycastHit2D[1], 1) > 0)
         {
-            RaycastHit2D _hit = Physics2D.Raycast(laserFirePoint.position, transform.right);
-            Draw2dRay(laserFirePoint.position, _hit.point);
+            hit = Physics2D.Raycast(firePointPosition, rightDirection);
+            Draw2dRay(firePointPosition, hit.point);
         }
         else
         {
-            Draw2dRay(laserFirePoint.position, laserFirePoint.transform.right * Distance);
+            Draw2dRay(firePointPosition, rightDirection * Distance);
         }
     }
 

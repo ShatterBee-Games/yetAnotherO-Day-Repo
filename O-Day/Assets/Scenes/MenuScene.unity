@@ -288,7 +288,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1402009276}
-        m_TargetAssemblyTypeName: StartMenuScript, Assembly-CSharp
+        m_TargetAssemblyTypeName: scenemanager, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -833,7 +833,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1366870773}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1402009276}
+        m_TargetAssemblyTypeName: scenemanager, Assembly-CSharp
+        m_MethodName: EndGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1366870773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -962,7 +974,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1402009272}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627c26511f8e6514db2d63bea60dbd4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a17a4d9d0a98bf43baa595ac3ab891c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1633292901

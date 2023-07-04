@@ -7,11 +7,8 @@ using UnityEngine.UI;
 public class bulletCounter : MonoBehaviour
 {
     public int bullets;
-
     public Image[] bulletArray;
-
     public Image reloadBar;
-
     public float progress;
 
 

@@ -201,6 +201,7 @@ public class CharacterController2D : MonoBehaviour
         //     nextFire = Time.time + fireRate;
         // }
 
+
         //kept second mouse button dont know if you guys still need it -zoe
         if (Input.GetMouseButton(0) && (Time.time > nextFire) && bulletCount > 0)
         {

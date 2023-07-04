@@ -21,6 +21,7 @@ public class enemyBullet : MonoBehaviour
         
         
         //dont optimize before checking if it breaks on collision destroy -kayli
+        // noted wont touch then -zoe
         if (transform.position.x > 30 || transform.position.x < -30 || transform.position.y > 20 || transform.position.y < -20) {
             destroy = true;
         }
