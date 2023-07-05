@@ -14,6 +14,7 @@ public class spawnLocation{
 [System.Serializable]
 public class modeAttacks{
     public List<Transform> listStompPosition;
+    public List<Transform> listVomitPosition;
     public List<spawnLocation> listProjectileLocation;
 
 }
@@ -30,6 +31,11 @@ public class enemyController2D : MonoBehaviour
 
     [SerializeField, Tooltip("Prefab for laser")]
     GameObject laserPrefab;
+
+    [SerializeField, Tooltip("Prefab for vomit")]
+    GameObject vomitPrefab;
+
+    
 
     //this is where we do the left right center switching
     [SerializeField, Tooltip("list of attack modes")]
@@ -77,6 +83,16 @@ public class enemyController2D : MonoBehaviour
 
     [SerializeField, Tooltip("bullet spawn delay")]
     float bulletTimerMax= 0.5f;
+
+    float vomitAttackTimer;
+
+    float vomitBulletTimer;
+
+    [SerializeField, Tooltip("vomit bullet timer max")]
+    float vomitBulletTimerMax= 0.1f;
+
+    [SerializeField, Tooltip("vomit timer max")]
+    float vomitAttackTimerMax= 2f;
 
     float attackTimer;
 
@@ -126,7 +142,12 @@ public class enemyController2D : MonoBehaviour
                 spawnLaser();
             }
             else {
-                startSpawn();
+                if (mode == MODE_CENTER){
+                    StartVomit();
+                }
+                else {
+                    startSpawn();
+                }
             }
         }
 
@@ -139,7 +160,14 @@ public class enemyController2D : MonoBehaviour
             }
         }
 
-
+         if (vomitAttackTimer > 0){
+            vomitAttackTimer -= Time.deltaTime;
+            vomitBulletTimer -= Time.deltaTime;
+            if(vomitBulletTimer <= 0){
+                SpawnVomit();
+                vomitBulletTimer = vomitBulletTimerMax;
+            }
+        }
         
         
     }
@@ -206,6 +234,26 @@ public class enemyController2D : MonoBehaviour
         laser = laserGameObject.GetComponent<Rigidbody2D>();
         attackTimer += 3.0f;
 
+    }
+
+    public void StartVomit(){
+        vomitAttackTimer = vomitAttackTimerMax;
+        vomitBulletTimer = vomitBulletTimerMax;
+        SpawnVomit();
+        attackTimer += vomitAttackTimerMax;
+
+    }
+
+    public void SpawnVomit(){
+        List<Transform> listVomitPosition = attackModes[mode].listVomitPosition;
+        int vomitPositionIndex = Random.Range(0,listVomitPosition.Count);
+        Transform vomitPosition = listVomitPosition[ vomitPositionIndex];
+        GameObject vomitGameObject = Instantiate(vomitPrefab, vomitPosition.position, Quaternion.identity);
+        Rigidbody2D vomit = vomitGameObject.GetComponent<Rigidbody2D>();
+        float yspeed;
+        yspeed = -10.0f;
+        vomit.velocity = new Vector2(0.0f, yspeed);
+        
     }
 
 }

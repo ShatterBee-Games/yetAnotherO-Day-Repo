@@ -28,8 +28,9 @@ public class enemyLaser : MonoBehaviour
     void Start()
     {
         switchTime = switchTimeMax;
-        SpriteRenderer warnRenderer = warnSprite.GetComponent<SpriteRenderer>();
-        warnRenderer.color = new Color(1f, 1f, 1f, 0.1f);
+        Transform warnTransform = warnSprite.GetComponent<Transform>();
+        warnTransform.localScale = new Vector3(0f,1f,1f);
+
     }
 
    // optimized -zoe
@@ -65,8 +66,8 @@ public class enemyLaser : MonoBehaviour
     void stg()
     {
         float opacity = (switchTimeMax - switchTime) / switchTimeMax;
-        SpriteRenderer warnRenderer = warnSprite.GetComponent<SpriteRenderer>();
-        warnRenderer.color = new Color(1f, 1f, 1f, opacity);
+        Transform warnTransform = warnSprite.GetComponent<Transform>();
+        warnTransform.localScale = new Vector3(opacity,1f,1f);
     }
 
     //switch time less
