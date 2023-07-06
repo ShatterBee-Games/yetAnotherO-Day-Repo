@@ -1,15 +1,12 @@
+// Origin: https://github.com/Matthew-J-Spencer/Ultimate-2D-Controller
+// Modified by -zoe
+
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace TarodevController {
-    /// <summary>
-    /// Hey!
-    /// Tarodev here. I built this controller as there was a severe lack of quality & free 2D controllers out there.
-    /// Right now it only contains movement and jumping, but it should be pretty easy to expand... I may even do it myself
-    /// if there's enough interest. You can play and compete for best times here: https://tarodev.itch.io/
-    /// If you hve any questions or would like to brag about your score, come to discord: https://discord.gg/GqeHHnhHpz
-    /// </summary>
+
     public class PlayerController : MonoBehaviour, IPlayerController {
         // Public for external hooks
         public Vector3 Velocity { get; private set; }
@@ -26,6 +23,11 @@ namespace TarodevController {
         private bool _active;
         void Awake() => Invoke(nameof(Activate), 0.5f);
         void Activate() =>  _active = true;
+
+        private int extraJumps;
+
+        [SerializeField, Tooltip("Any extra amount of jumps?")]
+        public int extraJumpValue;
         
         private void Update() {
             if(!_active) return;
@@ -146,9 +148,9 @@ namespace TarodevController {
 
         #region Walk
 
-        [Header("WALKING")] [SerializeField] private float _acceleration = 90;
+        [Header("WALKING")] [SerializeField] private float _acceleration = 70;
         [SerializeField] private float _moveClamp = 13;
-        [SerializeField] private float _deAcceleration = 60f;
+        [SerializeField] private float _deAcceleration = 50f;
         [SerializeField] private float _apexBonus = 2;
 
         private void CalculateWalk() {
@@ -179,8 +181,8 @@ namespace TarodevController {
         #region Gravity
 
         [Header("GRAVITY")] [SerializeField] private float _fallClamp = -40f;
-        [SerializeField] private float _minFallSpeed = 80f;
-        [SerializeField] private float _maxFallSpeed = 120f;
+        [SerializeField] private float _minFallSpeed = 73f;
+        [SerializeField] private float _maxFallSpeed = 90f;
         private float _fallSpeed;
 
         private void CalculateGravity() {
@@ -204,7 +206,7 @@ namespace TarodevController {
 
         #region Jump
 
-        [Header("JUMPING")] [SerializeField] private float _jumpHeight = 30;
+        [Header("JUMPING")] [SerializeField] private float _jumpHeight = 23;
         [SerializeField] private float _jumpApexThreshold = 10f;
         [SerializeField] private float _coyoteTimeThreshold = 0.1f;
         [SerializeField] private float _jumpBuffer = 0.1f;
@@ -226,15 +228,23 @@ namespace TarodevController {
                 _apexPoint = 0;
             }
         }
-
+            
         private void CalculateJump() {
             // Jump if: grounded or within coyote threshold || sufficient jump buffer
-            if (Input.JumpDown && CanUseCoyote || HasBufferedJump) {
+            if (Input.JumpDown && CanUseCoyote && extraJumps > 0 || HasBufferedJump) {
                 _currentVerticalSpeed = _jumpHeight;
                 _endedJumpEarly = false;
                 _coyoteUsable = false;
                 _timeLeftGrounded = float.MinValue;
                 JumpingThisFrame = true;
+                extraJumps--;
+            }else if (Input.JumpDown && CanUseCoyote && extraJumps == 0 || HasBufferedJump) {
+                _currentVerticalSpeed = _jumpHeight;
+                _endedJumpEarly = false;
+                _coyoteUsable = false;
+                _timeLeftGrounded = float.MinValue;
+                JumpingThisFrame = true;
+                
             }
             else {
                 JumpingThisFrame = false;

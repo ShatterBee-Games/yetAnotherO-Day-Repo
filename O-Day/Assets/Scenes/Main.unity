@@ -3306,7 +3306,9 @@ MonoBehaviour:
   speed: 9
   playerBulletPrefab: {fileID: 2187740654245750407, guid: 4e65ec254b7c17447a5d330231acfa7f,
     type: 3}
-  jumpforce: 22
+  jumpforce: 9.83
+  gravityScale: 1
+  jumpTimer: 0.5
   extraJumpValue: 1
   groundCheck: {fileID: 164902142}
   checkRadius: 0.5
