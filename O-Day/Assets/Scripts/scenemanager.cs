@@ -5,6 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class scenemanager : MonoBehaviour
 {
+   public bool isMenu = false;
+
+     void Update()
+    {
+        if (Input.anyKey && isMenu)
+        {
+            StartGame();
+        }
+    }
 
     public void MainMenu()
     {
@@ -18,4 +27,6 @@ public class scenemanager : MonoBehaviour
     {
         Application.Quit();
     }
+
+
 }
