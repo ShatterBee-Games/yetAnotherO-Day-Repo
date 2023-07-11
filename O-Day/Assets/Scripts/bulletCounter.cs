@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//Health system -zoe
 public class bulletCounter : MonoBehaviour
 {
     public int bullets;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement; //allows script to manage scene
-
+using UnityEngine.UI;
 
 [System.Serializable]
 public class spawnLocation{
@@ -21,7 +21,6 @@ public class modeAttacks{
 
 public class enemyController2D : MonoBehaviour
 {
-    public float health = 200f;
 
     [SerializeField, Tooltip("Prefab for stomp")]
     GameObject stompPrefab;
@@ -50,13 +49,10 @@ public class enemyController2D : MonoBehaviour
     int mode;
 
     [SerializeField, Tooltip("health transition value right")]
-    float rightSwap = 170f;
+    float rightSwap = 140f;
 
     [SerializeField, Tooltip("health transition value center")]
-    float centerSwap = 140f;
-
-    [SerializeField, Tooltip("health transition value phase2")]
-    float p2Swap = 100f;
+    float centerSwap = 80f;
 
     [SerializeField, Tooltip("list of boss location sprites")]
     List<GameObject> bossSprites;
@@ -102,11 +98,21 @@ public class enemyController2D : MonoBehaviour
     [SerializeField, Tooltip("attack timer minimum delay")]
     float attackTimerMin= 1.6f;
 
+    [SerializeField, Tooltip("healthbar image")]
+    Image healthjuice;
+
+    [SerializeField, Tooltip("health max")]
+    float healthMax = 200f;
+
+    [SerializeField, Tooltip("health current")]
+    float health;
+
     // Start is called before the first frame update
     void Start()
     {
         attackTimer = Random.Range(attackTimerMin, attackTimerMax);
         mode = MODE_LEFT;
+        health = healthMax;
     }
 
     // Update is called once per frame
@@ -125,9 +131,6 @@ public class enemyController2D : MonoBehaviour
             bossSprites[MODE_CENTER].SetActive(true);
         } 
 
-        if (mode == MODE_CENTER && health <= p2Swap){
-             SceneManager.LoadScene(4);
-        } 
 
 
         attackTimer -= Time.deltaTime;
@@ -174,6 +177,7 @@ public class enemyController2D : MonoBehaviour
 
     public void TakeDamage(float damage){
         health -= damage;
+        healthjuice.fillAmount = health/healthMax;
         Debug.Log(health);
     }
 
