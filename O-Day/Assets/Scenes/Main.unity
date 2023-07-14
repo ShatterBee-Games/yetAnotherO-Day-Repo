@@ -2453,6 +2453,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9047503468690831621, guid: 100f470a2103fb043b05cb42fa3cad1e,
         type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9047503468690831621, guid: 100f470a2103fb043b05cb42fa3cad1e,
+        type: 3}
+      propertyPath: healthMax
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9047503468690831621, guid: 100f470a2103fb043b05cb42fa3cad1e,
+        type: 3}
+      propertyPath: rightSwap
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 9047503468690831621, guid: 100f470a2103fb043b05cb42fa3cad1e,
+        type: 3}
+      propertyPath: centerSwap
+      value: 37
+      objectReference: {fileID: 0}
+    - target: {fileID: 9047503468690831621, guid: 100f470a2103fb043b05cb42fa3cad1e,
+        type: 3}
       propertyPath: healthjuice
       value: 
       objectReference: {fileID: 2060955782}
@@ -2477,12 +2497,17 @@ PrefabInstance:
     - target: {fileID: 9047503468690831621, guid: 100f470a2103fb043b05cb42fa3cad1e,
         type: 3}
       propertyPath: attackTimerMax
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9047503468690831621, guid: 100f470a2103fb043b05cb42fa3cad1e,
         type: 3}
       propertyPath: attackTimerMin
-      value: 1
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9047503468690831621, guid: 100f470a2103fb043b05cb42fa3cad1e,
+        type: 3}
+      propertyPath: bulletTimerMax
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 9047503468690831621, guid: 100f470a2103fb043b05cb42fa3cad1e,
         type: 3}
@@ -3517,7 +3542,7 @@ MonoBehaviour:
   speed: 9
   playerBulletPrefab: {fileID: 2187740654245750407, guid: 4e65ec254b7c17447a5d330231acfa7f,
     type: 3}
-  jumpforce: 9.83
+  jumpforce: 15
   extraJumpValue: 1
   groundCheck: {fileID: 164902142}
   checkRadius: 0.5
@@ -3526,7 +3551,7 @@ MonoBehaviour:
     m_Bits: 256
   fireRate: 0.2
   bulletCountMax: 5
-  reloadTimeerMax: 2.5
+  reloadTimeerMax: 1
   damageTimeMax: 0.5
 --- !u!50 &1533137393
 Rigidbody2D:
