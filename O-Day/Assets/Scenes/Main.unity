@@ -3543,7 +3543,6 @@ MonoBehaviour:
   speed: 10.33
   playerBulletPrefab: {fileID: 2187740654245750407, guid: 4e65ec254b7c17447a5d330231acfa7f,
     type: 3}
-  jumpforce: 15
   jumpforce: 17
   extraJumpValue: 1
   groundCheck: {fileID: 164902142}
