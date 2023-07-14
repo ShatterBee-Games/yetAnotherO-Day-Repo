@@ -101,7 +101,7 @@ namespace zoe
         private float jumpBuffer = 0.15f;
         private float jumpBufferCounter;
 
-        private float jumpTimer = 0.15f;
+      //  private float jumpTimer = 0.15f;
         private float jumpTimeCounter;
  
 
