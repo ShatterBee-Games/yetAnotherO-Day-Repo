@@ -3477,6 +3477,7 @@ GameObject:
   - component: {fileID: 1533137392}
   - component: {fileID: 1533137393}
   - component: {fileID: 1533137395}
+  - component: {fileID: 1533137396}
   m_Layer: 7
   m_Name: Character
   m_TagString: Untagged
@@ -3518,8 +3519,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1533137388}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 1.07, z: 0.24969}
-  m_LocalScale: {x: 2.3756645, y: 2.3756645, z: 2.3756645}
+  m_LocalPosition: {x: -0.016441, y: 1.0822, z: 0.24969}
+  m_LocalScale: {x: 1.7667104, y: 1.7667104, z: 1.7667104}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 833902383}
@@ -3539,10 +3540,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d7031d14ed112468c06b4ce4171c46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 9
+  speed: 10.33
   playerBulletPrefab: {fileID: 2187740654245750407, guid: 4e65ec254b7c17447a5d330231acfa7f,
     type: 3}
   jumpforce: 15
+  jumpforce: 17
   extraJumpValue: 1
   groundCheck: {fileID: 164902142}
   checkRadius: 0.5
@@ -3620,6 +3622,57 @@ MonoBehaviour:
   - {fileID: 74548563}
   reloadBar: {fileID: 1483452421}
   progress: 0
+--- !u!114 &1533137396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533137388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 1c602efa876da8143968b4cfe66409b6,
+    type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11500000, guid: 36d7031d14ed112468c06b4ce4171c46, type: 3}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 67f1826a-061f-48c3-9449-dad50db1ed2f
+    m_ActionName: Player/Jump[/XInputControllerWindows/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 827ad8db-d242-44fd-9fbe-6aada561dbcb
+    m_ActionName: Player/Shoot[/XInputControllerWindows/leftTrigger]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Xbox Controller
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 657243778}
 --- !u!1 &1569184179
 GameObject:
   m_ObjectHideFlags: 0

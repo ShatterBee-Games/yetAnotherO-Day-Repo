@@ -101,6 +101,10 @@ namespace zoe
         private float jumpBuffer = 0.15f;
         private float jumpBufferCounter;
 
+        private float jumpTimer = 0.15f;
+        private float jumpTimeCounter;
+ 
+
         private bool isJumping;
 
         private void Awake()
@@ -126,8 +130,7 @@ namespace zoe
             float targetSpeed = moveInput * speed;
             float diffrence = targetSpeed - rb.velocity.x;
             float accel = (Mathf.Abs(targetSpeed) > 0.01f) ? Acceleration : Deceleration;
-            float movement =
-                Mathf.Pow(Mathf.Abs(diffrence) * accel, velPower) * Mathf.Sign(diffrence);
+            float movement = Mathf.Pow(Mathf.Abs(diffrence) * accel, velPower) * Mathf.Sign(diffrence);
             rb.AddForce(movement * Vector2.right);
 
             //friction
@@ -152,10 +155,11 @@ namespace zoe
 
         void Update()
         {
+            //Debug.Log(Time.deltaTime);
             // new jump function -zoe /////
 
             extraJumps = coyoteTimeCounter > 0f ? extraJumpValue : extraJumps;
-
+            /*
             if (Input.GetButtonDown("Jump") && extraJumps > 0)
             {
                 rb.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse);
@@ -165,7 +169,16 @@ namespace zoe
             }
             else if (jumpBufferCounter > 0f && extraJumps == 0 && isGrounded == true)
             {
+                Debug.Log("fuck");
+                rb.AddForce(Vector2.up * jumpforce , ForceMode2D.Impulse);
+                OnJumpUp();
+                isJumping = true;
+            }*/
+
+             if (Input.GetButtonDown("Jump") && isGrounded == true)
+            {
                 rb.AddForce(Vector2.up * jumpforce, ForceMode2D.Impulse);
+                //extraJumps--;
                 OnJumpUp();
                 isJumping = true;
             }
@@ -173,16 +186,22 @@ namespace zoe
             if (Input.GetButtonUp("Jump"))
             {
                 coyoteTimeCounter = 0f;
-                jumpBufferCounter = 0f;
+                //jumpBufferCounter = 0f;
             }
 
             if (Input.GetButtonDown("Jump"))
             {
-                jumpBufferCounter = jumpBuffer;
+               jumpBufferCounter = jumpBuffer;
+               
+
+
+                //jumpTimeCounter = jumpBuffer;
             }
             else
             {
-                jumpBufferCounter -= Time.deltaTime;
+               jumpBufferCounter -= Time.deltaTime;
+                //jumpTimeCounter -= Time.deltaTime;
+                
             }
 
             if (rb.velocity.y < 0)
@@ -202,11 +221,11 @@ namespace zoe
             Scaler.x *= -1;
             transform.localScale = Scaler;
         }
-
+        
         public void OnJumpUp()
         {
-            if (rb.velocity.y > 0 && isJumping)
-            {
+            if (rb.velocity.y > 0 && isJumping && !Input.anyKey  )
+            {        
                 rb.AddForce(Vector2.down * rb.velocity.y * jumpCutMultiplier, ForceMode2D.Impulse);
             }
         }

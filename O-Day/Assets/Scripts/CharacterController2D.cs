@@ -1,25 +1,15 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class CharacterController2D : MonoBehaviour
 {
+    Controls _controls;
+
     [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
     float speed = 20;
-    /*
-        [SerializeField, Tooltip("Acceleration while grounded.")]
-        float walkAcceleration = 35;
 
-        [SerializeField, Tooltip("Acceleration while in the air.")]
-        float airAcceleration = 15;
-
-        [SerializeField, Tooltip("Deceleration applied when character is grounded and not attempting to move.")]
-        float groundDeceleration = 90;
-
-
-        [SerializeField, Tooltip("Max height the character will jump regardless of gravity")]
-        float jumpHeight = 3;
-    */
     [SerializeField, Tooltip("Prefab for bullet")]
     GameObject playerBulletPrefab;
 
@@ -74,7 +64,7 @@ public class CharacterController2D : MonoBehaviour
 
     /*
 
-    explination: Coyote Jump and Jump Buffer allows for lee way when jumping too late or too  early 
+    explination: Coyote Jump and Jump Buffer allows for lee way when jumping too late or too  early
     this intern makes the player experince feel alot more smooth.
 
     */
@@ -92,38 +82,34 @@ public class CharacterController2D : MonoBehaviour
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
-
         extraJumps = extraJumpValue;
+
+        _controls = new Controls();
+
+        _controls.Player.Shoot.performed += ctx => Onfire();
 
         // added Rigidbody2D as rb for more ctrl? -zoe
         rb = GetComponent<Rigidbody2D>();
 
         bulletCount = bulletCountMax;
 
-        bulletCounter bulletUI =  GetComponent<bulletCounter>();
+        bulletCounter bulletUI = GetComponent<bulletCounter>();
         bulletUI.bullets = bulletCount;
         // bulletUI.reloadBar.enabled = false;
-
-
-
     }
 
-    // chnaged from Update to FixedUpdate -zoe 
-    // Optimized -zoe 
+    // chnaged from Update to FixedUpdate -zoe
+    // Optimized -zoe
     private void FixedUpdate()
     {
-
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
         coyoteTimeCounter = isGrounded ? coyoteTime : coyoteTimeCounter -= Time.deltaTime;
-
-
 
         //use GetAxisRaw for more Snappy movement if desired -zoe
         moveInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
 
-
-        // make charecter Sprite face the direction its moving... 
+        // make charecter Sprite face the direction its moving...
         // if we have seprate sprites for rigth and left howver we can remove this -zoe
         if (facingRight == false && moveInput > 0)
         {
@@ -136,36 +122,37 @@ public class CharacterController2D : MonoBehaviour
     }
 
     void Update()
-    {   
-        if (damageTime > 0f){
+    {
+        if (damageTime > 0f)
+        {
             damageTime -= Time.deltaTime;
         }
 
-        if (reloadTimer > 0f){
+        if (reloadTimer > 0f)
+        {
             reloadTimer -= Time.deltaTime;
-            bulletCounter bulletUI =  GetComponent<bulletCounter>();
-            bulletUI.progress = reloadTimer/reloadTimeerMax;
-            if (reloadTimer <= 0f){
-            bulletCount = bulletCountMax;
-            bulletUI.bullets = bulletCount;
-            // bulletUI.reloadBar.enabled = false;
+            bulletCounter bulletUI = GetComponent<bulletCounter>();
+            bulletUI.progress = reloadTimer / reloadTimeerMax;
+            if (reloadTimer <= 0f)
+            {
+                bulletCount = bulletCountMax;
+                bulletUI.bullets = bulletCount;
+                // bulletUI.reloadBar.enabled = false;
             }
         }
 
-
         // new jump function -zoe /////
 
-       extraJumps = coyoteTimeCounter > 0f ? extraJumpValue : extraJumps;
-
+        extraJumps = coyoteTimeCounter > 0f ? extraJumpValue : extraJumps;
 
         if (Input.GetButtonDown("Jump") && extraJumps > 0)
         {
-            rb.velocity = Vector2.up * jumpforce;
+            Jump();
             extraJumps--;
         }
         else if (jumpBufferCounter > 0f && extraJumps == 0 && isGrounded == true)
         {
-            rb.velocity = Vector2.up * jumpforce;
+            Jump();
         }
 
         if (Input.GetButtonUp("Jump"))
@@ -174,8 +161,6 @@ public class CharacterController2D : MonoBehaviour
             jumpBufferCounter = 0f;
         }
 
-
-      
         if (Input.GetButtonDown("Jump"))
         {
             jumpBufferCounter = jumpBuffer;
@@ -185,44 +170,8 @@ public class CharacterController2D : MonoBehaviour
             jumpBufferCounter -= Time.deltaTime;
         }
 
-
-
-        /////////////////////////
-
-    
-        // if (Input.GetMouseButton(1) && (Time.time > nextFire))
-        // {
-        //     GameObject bulletGameObject = Instantiate(playerBulletPrefab, transform.position, transform.rotation);
-        //     Rigidbody2D bullet = bulletGameObject.GetComponent<Rigidbody2D>();
-        //     float xspeed;
-        //     // if facing right shoot right if facing left shoot left -zoe
-        //     xspeed = !facingRight ? -20.0f : 20.0f;
-        //     bullet.velocity = new Vector2(xspeed, 0.0f);
-        //     nextFire = Time.time + fireRate;
-        // }
-
-
-        //kept second mouse button dont know if you guys still need it -zoe
-        if (Input.GetMouseButton(0) && (Time.time > nextFire) && bulletCount > 0)
-        {
-            GameObject bulletGameObject = Instantiate(playerBulletPrefab, transform.position, transform.rotation);
-            Rigidbody2D bullet = bulletGameObject.GetComponent<Rigidbody2D>();
-            float xspeed;
-            // if facing right shoot right if facing left shoot left -zoe
-            xspeed = !facingRight ? -20.0f : 20.0f;
-            bullet.velocity = new Vector2(xspeed, 0.0f);
-            nextFire = Time.time + fireRate;
-            bulletCount--;
-            bulletCounter bulletUI =  GetComponent<bulletCounter>();
-            bulletUI.bullets = bulletCount;
-            if (bulletCount <= 0){
-                reloadTimer = reloadTimeerMax;
-                // bulletUI.reloadBar.enabled = true;
-
-            }
-        }
+       
     }
-
 
     // Flips charecter Sprite to opposite of whatever there facing -zoe
     void Flip()
@@ -233,27 +182,72 @@ public class CharacterController2D : MonoBehaviour
         transform.localScale = Scaler;
     }
 
-    void ProcessDamage(){
-        if (damageTime<=0){
+    void ProcessDamage()
+    {
+        if (damageTime <= 0)
+        {
             damageTime = damageTimeMax;
             Debug.Log("fuck");
-            hearts healthController =  GetComponent<hearts>();
-            if(healthController.health <= 1 ){
+            hearts healthController = GetComponent<hearts>();
+            if (healthController.health <= 1)
+            {
                 SceneManager.LoadScene(2);
             }
-            else {
+            else
+            {
                 healthController.health--;
             }
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other){
+    void OnTriggerEnter2D(Collider2D other)
+    {
         ProcessDamage();
     }
 
-    void OnTriggerStay2D(Collider2D other){
+    void OnTriggerStay2D(Collider2D other)
+    {
         ProcessDamage();
     }
 
+    void Onfire()
+    {
+        if ((Time.time > nextFire) && bulletCount > 0)
+        {
+            GameObject bulletGameObject = Instantiate(
+                playerBulletPrefab,
+                transform.position,
+                transform.rotation
+            );
+            Rigidbody2D bullet = bulletGameObject.GetComponent<Rigidbody2D>();
+            float xspeed;
+            // if facing right shoot right if facing left shoot left -zoe
+            xspeed = !facingRight ? -20.0f : 20.0f;
+            bullet.velocity = new Vector2(xspeed, 0.0f);
+            nextFire = Time.time + fireRate;
+            bulletCount--;
+            bulletCounter bulletUI = GetComponent<bulletCounter>();
+            bulletUI.bullets = bulletCount;
+            if (bulletCount <= 0)
+            {
+                reloadTimer = reloadTimeerMax;
+                // bulletUI.reloadBar.enabled = true;
+            }
+        }
+    }
 
+    void Jump()
+    {
+        rb.velocity = Vector2.up * jumpforce;
+    }
+
+    void OnEnable()
+    {
+        _controls.Player.Enable();
+    }
+
+    void OnDisable()
+    {
+        _controls.Player.Disable();
+    }
 }
