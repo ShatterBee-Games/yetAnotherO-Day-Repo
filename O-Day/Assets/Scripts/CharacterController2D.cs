@@ -8,7 +8,6 @@ public class CharacterController2D : MonoBehaviour
     Controls _controls;
 
     public Animator m_Animator;
-    
 
     [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
     float speed = 20;
@@ -91,7 +90,6 @@ public class CharacterController2D : MonoBehaviour
         _controls = new Controls();
         m_Animator.SetBool("Facing_Right", facingRight);
         m_Animator.SetBool("isRunning", running);
-        
 
         _controls.Player.Shoot.performed += ctx => Onfire();
 
@@ -120,28 +118,16 @@ public class CharacterController2D : MonoBehaviour
 
         m_Animator.SetBool("isRunning", running);
 
-        if (moveInput > 0 || moveInput < 0)
-        {
-            running = true;
-        }else{
-            running = false;
-        }
-        
+        running = moveInput != 0;
 
         rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
 
         // make charecter Sprite face the direction its moving...
         // if we have seprate sprites for rigth and left howver we can remove this -zoe
-        if (facingRight == false && moveInput > 0)
+        if ((facingRight && moveInput < 0) || (!facingRight && moveInput > 0))
         {
             Flip();
         }
-        else if (facingRight == true && moveInput < 0)
-        {
-            Flip();
-        }
-       
-
     }
 
     void Update()
@@ -192,8 +178,6 @@ public class CharacterController2D : MonoBehaviour
         {
             jumpBufferCounter -= Time.deltaTime;
         }
-
-       
     }
 
     // Flips charecter Sprite to opposite of whatever there facing -zoe
