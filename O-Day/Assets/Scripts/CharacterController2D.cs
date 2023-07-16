@@ -7,6 +7,9 @@ public class CharacterController2D : MonoBehaviour
 {
     Controls _controls;
 
+    public Animator m_Animator;
+    
+
     [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
     float speed = 20;
 
@@ -37,6 +40,7 @@ public class CharacterController2D : MonoBehaviour
     public LayerMask whatIsGround;
 
     private bool facingRight = true;
+    private bool running = false;
 
     //////////////////////////////////////////////////
 
@@ -85,11 +89,16 @@ public class CharacterController2D : MonoBehaviour
         extraJumps = extraJumpValue;
 
         _controls = new Controls();
+        m_Animator.SetBool("Facing_Right", facingRight);
+        m_Animator.SetBool("isRunning", running);
+        
 
         _controls.Player.Shoot.performed += ctx => Onfire();
 
         // added Rigidbody2D as rb for more ctrl? -zoe
         rb = GetComponent<Rigidbody2D>();
+        //this.gameObject.transform.GetChild(0)
+        m_Animator = this.gameObject.transform.GetChild(0).GetComponent<Animator>();
 
         bulletCount = bulletCountMax;
 
@@ -107,6 +116,18 @@ public class CharacterController2D : MonoBehaviour
 
         //use GetAxisRaw for more Snappy movement if desired -zoe
         moveInput = Input.GetAxis("Horizontal");
+        m_Animator.SetFloat("moveinput", moveInput);
+
+        m_Animator.SetBool("isRunning", running);
+
+        if (moveInput > 0 || moveInput < 0)
+        {
+            running = true;
+        }else{
+            running = false;
+        }
+        
+
         rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
 
         // make charecter Sprite face the direction its moving...
@@ -119,6 +140,8 @@ public class CharacterController2D : MonoBehaviour
         {
             Flip();
         }
+       
+
     }
 
     void Update()
@@ -177,9 +200,11 @@ public class CharacterController2D : MonoBehaviour
     void Flip()
     {
         facingRight = !facingRight;
+        m_Animator.SetBool("Facing_Right", facingRight);
+        /*
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
-        transform.localScale = Scaler;
+        transform.localScale = Scaler;*/
     }
 
     void ProcessDamage()
