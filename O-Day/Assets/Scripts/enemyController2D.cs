@@ -21,6 +21,7 @@ public class modeAttacks{
 
 public class enemyController2D : MonoBehaviour
 {
+    Animator anim;
 
     [SerializeField, Tooltip("Prefab for stomp")]
     GameObject stompPrefab;
@@ -139,6 +140,7 @@ public class enemyController2D : MonoBehaviour
             attackTimer = Random.Range(attackTimerMin, attackTimerMax);
             float chance = Random.Range(0.0f, 3.0f);
             if(chance > 2f){
+                anim.SetTrigger("startStomp");
                 SpawnStomp();
             }
             else if (chance > 1f){
