@@ -2198,8 +2198,8 @@ MonoBehaviour:
   - {fileID: 871251635}
   - {fileID: 39549897}
   m_Bounds:
-    m_Center: {x: -0.021358907, y: 0.32310218, z: 0}
-    m_Extent: {x: 0.6772147, y: 0.9506186, z: 0}
+    m_Center: {x: 0.01084888, y: 0.063356936, z: -0.00000011920929}
+    m_Extent: {x: 0.6675547, y: 0.961035, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -2388,8 +2388,8 @@ MonoBehaviour:
   - {fileID: 1173249993}
   - {fileID: 1667613802}
   m_Bounds:
-    m_Center: {x: -0.023126066, y: 0.24586672, z: 0}
-    m_Extent: {x: 0.68210506, y: 0.92674726, z: 0}
+    m_Center: {x: -0.0004749894, y: 0.0019451976, z: 0}
+    m_Extent: {x: 0.6675551, y: 0.9630549, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
