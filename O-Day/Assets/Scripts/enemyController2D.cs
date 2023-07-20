@@ -122,9 +122,10 @@ public class enemyController2D : MonoBehaviour
     {   
 
         if (mode == MODE_LEFT && health <= rightSwap){
-            mode = MODE_RIGHT;
-            bossSprites[MODE_LEFT].SetActive(false);
-            bossSprites[MODE_RIGHT].SetActive(true);
+            anim.SetTrigger("switchRight");
+            // mode = MODE_RIGHT;
+            // bossSprites[MODE_LEFT].SetActive(false);
+            // bossSprites[MODE_RIGHT].SetActive(true);
         } 
 
         if (mode == MODE_RIGHT && health <= centerSwap){
@@ -146,7 +147,9 @@ public class enemyController2D : MonoBehaviour
                 // SpawnStomp();
             }
             else if (chance > 1f){
-                spawnLaser();
+                anim.SetTrigger("startLaser");
+                attackTimer += 1.2f;
+                //spawnLaser();
             }
             else {
                 if (mode == MODE_CENTER){
@@ -156,7 +159,7 @@ public class enemyController2D : MonoBehaviour
                 }
                 else {
                     anim.SetTrigger("startBullet");
-                    attackTimer += 1.5f;
+                    attackTimer += 1.25f;
                     //startSpawn();
                 }
             }
@@ -181,6 +184,13 @@ public class enemyController2D : MonoBehaviour
         }
         
         
+    }
+
+    public void SwitchModesRight(){
+        mode = MODE_RIGHT;
+        bossSprites[MODE_LEFT].SetActive(false);
+        bossSprites[MODE_RIGHT].SetActive(true);
+
     }
 
     public void TakeDamage(float damage){
