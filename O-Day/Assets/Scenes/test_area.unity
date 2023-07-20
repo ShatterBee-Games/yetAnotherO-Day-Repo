@@ -514,6 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d7031d14ed112468c06b4ce4171c46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Animator: {fileID: 0}
   speed: 13
   playerBulletPrefab: {fileID: 2187740654245750407, guid: 4e65ec254b7c17447a5d330231acfa7f,
     type: 3}
@@ -3211,6 +3212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d7031d14ed112468c06b4ce4171c46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Animator: {fileID: 0}
   speed: 20
   playerBulletPrefab: {fileID: 0}
   jumpforce: 0
