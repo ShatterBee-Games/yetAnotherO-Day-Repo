@@ -94,10 +94,10 @@ public class enemyController2D : MonoBehaviour
     float attackTimer;
 
     [SerializeField, Tooltip("attack timer maximum delay")]
-    float attackTimerMax= 6.0f;
+    float attackTimerMax= 3.0f;
 
     [SerializeField, Tooltip("attack timer minimum delay")]
-    float attackTimerMin= 1.6f;
+    float attackTimerMin= 1.0f;
 
     [SerializeField, Tooltip("healthbar image")]
     Image healthjuice;
@@ -155,7 +155,9 @@ public class enemyController2D : MonoBehaviour
                     //StartVomit();
                 }
                 else {
-                    startSpawn();
+                    anim.SetTrigger("startBullet");
+                    attackTimer += 1.5f;
+                    //startSpawn();
                 }
             }
         }

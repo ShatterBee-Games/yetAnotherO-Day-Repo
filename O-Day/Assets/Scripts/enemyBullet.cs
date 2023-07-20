@@ -7,7 +7,7 @@ public class enemyBullet : MonoBehaviour
     
     public bool destroy = false;
     public Transform playerPosition;
-    float waitTime = 2.0f;
+    float waitTime = 0.2f;
     bool fired = false;
 
     void Update()
@@ -38,7 +38,7 @@ public class enemyBullet : MonoBehaviour
         Vector2 bulletPosition2d = new Vector2(transform.position.x, transform.position.y);
         Vector2 playerPosition2d = new Vector2(playerPosition.position.x, playerPosition.position.y);
         Vector2 direction = (playerPosition2d-bulletPosition2d).normalized;
-        float xspeed = 10.0f;
+        float xspeed = 12.0f;
         GetComponent<Rigidbody2D>().velocity = direction*xspeed ;
 
     }
