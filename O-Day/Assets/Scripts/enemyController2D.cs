@@ -114,6 +114,7 @@ public class enemyController2D : MonoBehaviour
         attackTimer = Random.Range(attackTimerMin, attackTimerMax);
         mode = MODE_LEFT;
         health = healthMax;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -141,14 +142,17 @@ public class enemyController2D : MonoBehaviour
             float chance = Random.Range(0.0f, 3.0f);
             if(chance > 2f){
                 anim.SetTrigger("startStomp");
-                SpawnStomp();
+                attackTimer += 1.2f;
+                // SpawnStomp();
             }
             else if (chance > 1f){
                 spawnLaser();
             }
             else {
                 if (mode == MODE_CENTER){
-                    StartVomit();
+                    anim.SetTrigger("startVomit");
+                    attackTimer += 2.4f;
+                    //StartVomit();
                 }
                 else {
                     startSpawn();
