@@ -103,8 +103,6 @@ public class CharacterController2D : MonoBehaviour
         m_Animator = this.gameObject.transform.GetChild(0).GetComponent<Animator>();
 
         cameraShaker = Shake.GetComponent<CameraShaker>();
-      
-
 
         bulletCount = bulletCountMax;
 
