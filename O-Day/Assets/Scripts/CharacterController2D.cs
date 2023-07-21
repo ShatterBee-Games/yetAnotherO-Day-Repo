@@ -9,11 +9,15 @@ public class CharacterController2D : MonoBehaviour
 
     public Animator m_Animator;
 
+    CameraShaker cameraShaker;
+    [SerializeField] GameObject Shake;
+
     [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
     float speed = 20;
 
     [SerializeField, Tooltip("Prefab for bullet")]
     GameObject playerBulletPrefab;
+
 
     // zoe - ///////////////////////////////////////////
 
@@ -98,6 +102,10 @@ public class CharacterController2D : MonoBehaviour
         //this.gameObject.transform.GetChild(0)
         m_Animator = this.gameObject.transform.GetChild(0).GetComponent<Animator>();
 
+        cameraShaker = Shake.GetComponent<CameraShaker>();
+      
+
+
         bulletCount = bulletCountMax;
 
         bulletCounter bulletUI = GetComponent<bulletCounter>();
@@ -128,6 +136,7 @@ public class CharacterController2D : MonoBehaviour
         {
             Flip();
         }
+ 
     }
 
     void Update()
@@ -197,6 +206,7 @@ public class CharacterController2D : MonoBehaviour
         {
             damageTime = damageTimeMax;
             Debug.Log("fuck");
+            cameraShaker.BasicShake(0.5f, 0.1f);
             hearts healthController = GetComponent<hearts>();
             if (healthController.health <= 1)
             {
