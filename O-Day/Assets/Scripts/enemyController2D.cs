@@ -129,9 +129,10 @@ public class enemyController2D : MonoBehaviour
         } 
 
         if (mode == MODE_RIGHT && health <= centerSwap){
-            mode = MODE_CENTER;
-            bossSprites[MODE_RIGHT].SetActive(false);
-            bossSprites[MODE_CENTER].SetActive(true);
+            anim.SetTrigger("switchCenter");
+            // mode = MODE_CENTER;
+            // bossSprites[MODE_RIGHT].SetActive(false);
+            // bossSprites[MODE_CENTER].SetActive(true);
         } 
 
 
@@ -192,6 +193,13 @@ public class enemyController2D : MonoBehaviour
         bossSprites[MODE_RIGHT].SetActive(true);
 
     }
+
+    public void SwitchModesCenter(){
+        mode = MODE_CENTER;
+        bossSprites[MODE_RIGHT].SetActive(false);
+        bossSprites[MODE_CENTER].SetActive(true);
+    }
+
 
     public void TakeDamage(float damage){
         health -= damage;
