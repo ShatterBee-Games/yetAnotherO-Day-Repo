@@ -220,7 +220,6 @@ public class enemyController2D : MonoBehaviour
         health -= damage;
         healthjuice.fillAmount = health / healthMax;
         Debug.Log(health);
-        cameraShaker.BasicShake(0.5f, 0.1f);
     }
 
     public void SpawnStomp()
@@ -246,11 +245,12 @@ public class enemyController2D : MonoBehaviour
             enemyStomp stompcode = stompGameObject.GetComponent<enemyStomp>();
             stompcode.initPosition = stomp.position;
             //spawning second one
-            stompGameObject = Instantiate(stompPrefab, stompPosition.position, Quaternion.identity);
+            stompGameObject = Instantiate(stompPrefab, stompPosition.position, Quaternion.Euler(0, 180, 0));
             stomp = stompGameObject.GetComponent<Rigidbody2D>();
             stomp.velocity = new Vector2(-xspeed, 0.0f);
             stompcode = stompGameObject.GetComponent<enemyStomp>();
             stompcode.initPosition = stomp.position;
+            cameraShaker.BasicShake(0.8f, 0.2f);
         }
 
         attackTimer += 2.0f;
@@ -303,11 +303,12 @@ public class enemyController2D : MonoBehaviour
         vomitAttackTimer = vomitAttackTimerMax;
         vomitBulletTimer = vomitBulletTimerMax;
         SpawnVomit();
+        cameraShaker.SmoothShake(0.3f, vomitAttackTimerMax, 0.1f,0.1f);
         attackTimer += vomitAttackTimerMax;
     }
 
     public void SpawnVomit()
-    {
+    {   
         List<Transform> listVomitPosition = attackModes[mode].listVomitPosition;
         int vomitPositionIndex = Random.Range(0, listVomitPosition.Count);
         Transform vomitPosition = listVomitPosition[vomitPositionIndex];
@@ -320,5 +321,9 @@ public class enemyController2D : MonoBehaviour
         float yspeed;
         yspeed = -10.0f;
         vomit.velocity = new Vector2(0.0f, yspeed);
+    }
+
+    public void EntryShake(){
+        cameraShaker.BasicShake(1f, 0.25f);
     }
 }

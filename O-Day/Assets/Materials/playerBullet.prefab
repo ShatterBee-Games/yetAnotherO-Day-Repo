@@ -81,8 +81,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.024034087, y: 0.0131091615}
-  m_Size: {x: 0.95193315, y: 0.19596153}
+  m_Offset: {x: 0.017038466, y: 0.00086819933}
+  m_Size: {x: 1.371612, y: 0.32536468}
   m_Direction: 1
 --- !u!1 &3346936923724408993
 GameObject:
@@ -109,8 +109,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3346936923724408993}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.6390777, y: 2.6390777, z: 2.6390777}
+  m_LocalPosition: {x: 0.029, y: 0, z: 0}
+  m_LocalScale: {x: 1.2739135, y: 1.2739135, z: 1.2739135}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2022555184173027164}
@@ -157,7 +157,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ec12833134e9db04fbf953626f7bf132, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d703787ca4d10374980a25eb805ac6bc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
