@@ -78,6 +78,7 @@ public class enemyLaser : MonoBehaviour
         laserOn = true;
         GetComponent<Collider2D>().enabled = true;
         transform.Translate(0.0001f, 0f, 0f);
+        
     }
 }
 
