@@ -14,12 +14,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DeathScene.unity
     guid: 9615811bbf7235846857a1735d918c71
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Phase2.unity
     guid: 4c2f279fce4eec5488618f792fac484a
+  - enabled: 1
+    path: Assets/Scenes/WinScene.unity
+    guid: ff405c6d6da27604f928293fe5946206
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 1309adb57fcb39a49a9ca10cb95fdad8,
       type: 2}

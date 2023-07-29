@@ -199,6 +199,10 @@ public class enemyController2D : MonoBehaviour
                 vomitBulletTimer = vomitBulletTimerMax;
             }
         }
+
+        if (health<=0){
+            anim.SetTrigger("healthZero");
+        }
     }
 
     public void SwitchModesRight()
@@ -325,5 +329,9 @@ public class enemyController2D : MonoBehaviour
 
     public void EntryShake(){
         cameraShaker.BasicShake(1f, 0.25f);
+    }
+
+    public void VictoryScreen(){
+        SceneManager.LoadScene(3); //YOURE A WINNER DING DING DING
     }
 }
