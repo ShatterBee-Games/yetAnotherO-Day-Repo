@@ -162,7 +162,7 @@ public class enemyController2D : MonoBehaviour
             anim.SetTrigger("switchCenter");
             musicController.SetTrigger("switchCenter");
             attackTimerMax = 1f;
-            attackTimerMin -= 0f;
+            attackTimerMin = 0f;
             currentSafeTime = centerSafe;
             // if(musicController.clip != centerMusic){
             //     musicController.clip=centerMusic;
