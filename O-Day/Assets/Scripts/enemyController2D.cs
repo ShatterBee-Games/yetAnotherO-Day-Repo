@@ -175,7 +175,7 @@ public class enemyController2D : MonoBehaviour
 
         attackTimer -= Time.deltaTime;
 
-        if (attackTimer < 0)
+        if (attackTimer < 0 && health >0)
         {
             attackTimer = Random.Range(attackTimerMin, attackTimerMax);
             float chance = Random.Range(0.0f, 3.0f);
@@ -232,6 +232,7 @@ public class enemyController2D : MonoBehaviour
 
         if (health<=0){
             anim.SetTrigger("healthZero");
+            Debug.Log("dead");
         }
     }
 
