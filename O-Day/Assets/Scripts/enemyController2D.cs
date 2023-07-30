@@ -110,6 +110,24 @@ public class enemyController2D : MonoBehaviour
     [SerializeField, Tooltip("health current")]
     float health;
 
+    [SerializeField, Tooltip("music controller")]
+    Animator musicController;
+
+    [SerializeField, Tooltip("left safe time")]
+    float leftSafe = 0f;
+
+    [SerializeField, Tooltip("right safe time")]
+    float rightSafe = 1.0f;
+
+    [SerializeField, Tooltip("center safe time")]
+    float centerSafe = 2.0f;
+
+    float currentSafeTime = 3.0f;
+
+    // [SerializeField, Tooltip("center music")]
+    // AudioClip centerMusic;
+
+
     void Awake()
     {
         cameraShaker = Shake.GetComponent<CameraShaker>();
@@ -122,6 +140,7 @@ public class enemyController2D : MonoBehaviour
         mode = MODE_LEFT;
         health = healthMax;
         anim = GetComponent<Animator>();
+        currentSafeTime = leftSafe;
     }
 
     // Update is called once per frame
@@ -130,6 +149,9 @@ public class enemyController2D : MonoBehaviour
         if (mode == MODE_LEFT && health <= rightSwap)
         {
             anim.SetTrigger("switchRight");
+            attackTimerMax = 2f;
+            attackTimerMin = 0.5f;
+            currentSafeTime = rightSafe;
             // mode = MODE_RIGHT;
             // bossSprites[MODE_LEFT].SetActive(false);
             // bossSprites[MODE_RIGHT].SetActive(true);
@@ -138,6 +160,14 @@ public class enemyController2D : MonoBehaviour
         if (mode == MODE_RIGHT && health <= centerSwap)
         {
             anim.SetTrigger("switchCenter");
+            musicController.SetTrigger("switchCenter");
+            attackTimerMax = 1f;
+            attackTimerMin -= 0f;
+            currentSafeTime = centerSafe;
+            // if(musicController.clip != centerMusic){
+            //     musicController.clip=centerMusic;
+            //     musicController.Play();
+            // }
             // mode = MODE_CENTER;
             // bossSprites[MODE_RIGHT].SetActive(false);
             // bossSprites[MODE_CENTER].SetActive(true);
@@ -257,7 +287,7 @@ public class enemyController2D : MonoBehaviour
             cameraShaker.BasicShake(0.8f, 0.2f);
         }
 
-        attackTimer += 2.0f;
+        attackTimer += (2.0f - currentSafeTime) ;
     }
 
     public void startSpawn()
@@ -270,7 +300,7 @@ public class enemyController2D : MonoBehaviour
         step = projectileLocation.step;
         bulletsToSpawn = bulletsToSpawnMax;
         bulletTimer = bulletTimerMax;
-        attackTimer += 3.0f;
+        attackTimer += (3.0f - currentSafeTime);
     }
 
     public void SpawnBullets(int i)
@@ -299,7 +329,7 @@ public class enemyController2D : MonoBehaviour
             Quaternion.identity
         );
         laser = laserGameObject.GetComponent<Rigidbody2D>();
-        attackTimer += 3.0f;
+        attackTimer += (3.0f - currentSafeTime);
     }
 
     public void StartVomit()
@@ -308,7 +338,7 @@ public class enemyController2D : MonoBehaviour
         vomitBulletTimer = vomitBulletTimerMax;
         SpawnVomit();
         cameraShaker.SmoothShake(0.3f, vomitAttackTimerMax, 0.1f,0.1f);
-        attackTimer += vomitAttackTimerMax;
+        attackTimer += (vomitAttackTimerMax - currentSafeTime);
     }
 
     public void SpawnVomit()
