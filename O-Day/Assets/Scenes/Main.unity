@@ -1969,7 +1969,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 114d6bc6e3d9a9f4d96424ae363d84fd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ded8d32133c0fe74f98b493322c6682e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -1999,6 +1999,39 @@ MonoBehaviour:
     - m_Name: Entry
       m_Hash: 0
       m_Sprite: {fileID: 21300000, guid: 951714d5999b6c740b6444f7efd16b37, type: 3}
+    - m_Name: Entry_7
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: ded8d32133c0fe74f98b493322c6682e, type: 3}
+  - m_Name: rightStomp
+    m_Hash: 0
+    m_CategoryList:
+    - m_Name: Entry
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: c8e1ab240a6c9bb439d1dea4b93874c7, type: 3}
+    - m_Name: Entry_0
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: b3d7a9473a3d7f741874258e5a8588a6, type: 3}
+  - m_Name: rightLaser
+    m_Hash: 0
+    m_CategoryList:
+    - m_Name: Entry
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: 6acabb97ea57a3847bccee613f5415d3, type: 3}
+    - m_Name: Entry_0
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: 96d8889b3f97932449f819642b96d330, type: 3}
+    - m_Name: Entry_1
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: 39d9514919eb4e14e951e7198b70514f, type: 3}
+    - m_Name: Entry_2
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: 20e80ff1b38ce2c44a31127c62c2c4a7, type: 3}
+    - m_Name: Entry_3
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: d62a6a083f774fb41bf9e5312a6ab0fe, type: 3}
+    - m_Name: Entry_4
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: d806b93c229ff5c41a24f9f156eabdc4, type: 3}
   m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: 1d41b9dfe55e4d54f95af7cb4e1516bb,
     type: 3}
 --- !u!114 &684880102
@@ -2014,8 +2047,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CategoryHash: 8.5061215e-27
-  m_labelHash: 3.3386203e-21
-  m_SpriteKey: 1.0734851e-34
+  m_labelHash: 2.2333124e-13
+  m_SpriteKey: 5.0022697e-10
 --- !u!1 &762043041
 GameObject:
   m_ObjectHideFlags: 0
@@ -4218,6 +4251,36 @@ MonoBehaviour:
     - m_Name: Entry_3
       m_Hash: 0
       m_Sprite: {fileID: 21300000, guid: 94ef31d2f0a9fd246aea846d51d13a8d, type: 3}
+  - m_Name: centerStomp
+    m_Hash: 0
+    m_CategoryList:
+    - m_Name: Entry
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: 462e58f07cd36be45b44566e1393e4f6, type: 3}
+    - m_Name: Entry_0
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: ec2b2d5804d5c724d8cde1286ac8d601, type: 3}
+  - m_Name: centerLaser
+    m_Hash: 0
+    m_CategoryList:
+    - m_Name: Entry
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: 6479b96333b3b8a4cbd4760ea54966e4, type: 3}
+    - m_Name: Entry_0
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: 0882c2780a512a742a2717f87e668627, type: 3}
+    - m_Name: Entry_1
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: a15acecfe77359e48a8d77442336bec9, type: 3}
+    - m_Name: Entry_2
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: 9d6739c75d2bf714b8ae43dda334060f, type: 3}
+    - m_Name: Entry_3
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: 20878decffec6dc45822faa96d87c19d, type: 3}
+    - m_Name: Entry_4
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: 6ff58b3d511250c4ca5a46c2cb9cbbe8, type: 3}
   m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: 94e03a99da6fe2f459d57f7b1ed7d964,
     type: 3}
 --- !u!114 &1314201649
@@ -4830,6 +4893,36 @@ MonoBehaviour:
     - m_Name: Entry_7
       m_Hash: 0
       m_Sprite: {fileID: 21300000, guid: ded8d32133c0fe74f98b493322c6682e, type: 3}
+  - m_Name: leftStomp
+    m_Hash: 0
+    m_CategoryList:
+    - m_Name: Entry
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: c8e1ab240a6c9bb439d1dea4b93874c7, type: 3}
+    - m_Name: Entry_0
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: b3d7a9473a3d7f741874258e5a8588a6, type: 3}
+  - m_Name: leftLaser
+    m_Hash: 0
+    m_CategoryList:
+    - m_Name: Entry
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: 6acabb97ea57a3847bccee613f5415d3, type: 3}
+    - m_Name: Entry_0
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: 96d8889b3f97932449f819642b96d330, type: 3}
+    - m_Name: Entry_1
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: 39d9514919eb4e14e951e7198b70514f, type: 3}
+    - m_Name: Entry_2
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: 20e80ff1b38ce2c44a31127c62c2c4a7, type: 3}
+    - m_Name: Entry_3
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: d62a6a083f774fb41bf9e5312a6ab0fe, type: 3}
+    - m_Name: Entry_4
+      m_Hash: 0
+      m_Sprite: {fileID: 21300000, guid: d806b93c229ff5c41a24f9f156eabdc4, type: 3}
   m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: 1d41b9dfe55e4d54f95af7cb4e1516bb,
     type: 3}
 --- !u!114 &1535280052
