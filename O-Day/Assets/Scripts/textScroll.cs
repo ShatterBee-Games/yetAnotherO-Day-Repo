@@ -8,6 +8,10 @@ using UnityEngine.InputSystem;
 public class textScroll : MonoBehaviour
 {   
     Controls _controls;
+    GameObject soundEffectsSource; 
+    public AudioClip keyboardClick1;  
+    public AudioClip keyboardClick2;
+    public AudioClip keyboardClick3;
 
     [Header("Text Settings")]
 
@@ -28,6 +32,7 @@ public class textScroll : MonoBehaviour
          _controls = new Controls();
 
          _controls.Player.Shoot.performed += ctx => GameStart();
+         soundEffectsSource= GameObject.FindGameObjectWithTag("sound"); 
     }
 
     public void Update(){
@@ -52,6 +57,18 @@ public class textScroll : MonoBehaviour
     IEnumerator AnimateText(){
         for(int i = 0; i < itemInfo[currentDisplayingText].Length+1; i++ ){
             itemInfoText.text=itemInfo[currentDisplayingText].Substring(0,i);
+            float chance = Random.Range(0.0f, 3.0f);
+
+            if(soundEffectsSource!=null && chance >2f){ 
+                soundEffectsSource.GetComponent<AudioSource>().PlayOneShot(keyboardClick1); 
+            }  
+            else if (soundEffectsSource!=null && chance >1f){
+                soundEffectsSource.GetComponent<AudioSource>().PlayOneShot(keyboardClick2); 
+            }
+            else if (soundEffectsSource!=null){
+                soundEffectsSource.GetComponent<AudioSource>().PlayOneShot(keyboardClick3); 
+            }
+
             yield return new WaitForSeconds(textSpeed);
 
         }

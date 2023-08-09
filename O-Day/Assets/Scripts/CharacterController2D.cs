@@ -200,7 +200,7 @@ public class CharacterController2D : MonoBehaviour
 
     void ProcessDamage()
     {
-        if (damageTime <= 0)
+        if (damageTime <= 0 )
         {
             damageTime = damageTimeMax;
             Debug.Log("fuck");
