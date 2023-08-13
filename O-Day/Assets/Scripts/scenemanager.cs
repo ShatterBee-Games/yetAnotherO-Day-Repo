@@ -7,6 +7,7 @@ public class scenemanager : MonoBehaviour
 {
    public bool isMenu = false;
    public bool isIntro = false;
+   public bool isEnd = false;
 
      void Update()
     {
@@ -18,6 +19,11 @@ public class scenemanager : MonoBehaviour
         if (Input.anyKey && isIntro)
         {
             StartGame();
+        }
+
+        if (Input.anyKey && isEnd)
+        {
+            MainMenu();
         }
     }
 
