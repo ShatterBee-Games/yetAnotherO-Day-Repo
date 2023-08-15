@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class PauseMenu : MonoBehaviour
 {
     //creates a pauseUI object and declares it's display and false (Shane)
@@ -9,7 +10,7 @@ public class PauseMenu : MonoBehaviour
     void Update()
     {
         //checks if the pause menu is up and either brings it up or gets rid of it (Shane)
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7))
         {
 
             // removed if Stament and replaced it with one funtion :> -zoe
