@@ -5,7 +5,7 @@ using UnityEngine;
 public class playerBulletBehaviour : MonoBehaviour
 {   
     
-    float damage = 1;
+    float damage = 10;
     bool destroy = false;
 
     // Update is called once per frame

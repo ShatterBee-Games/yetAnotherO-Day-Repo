@@ -21,11 +21,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Phase2.unity
     guid: 4c2f279fce4eec5488618f792fac484a
   - enabled: 1
-    path: Assets/Scenes/WinScene.unity
+    path: Assets/Scenes/Credits.unity
     guid: ff405c6d6da27604f928293fe5946206
   - enabled: 1
     path: Assets/Scenes/introCutscene.unity
     guid: 4de9268d6e4d0ef46bb8bfa540d2372e
+  - enabled: 1
+    path: Assets/Scenes/winScene.unity
+    guid: 67b4f29ce493fec458236089383af79e
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 5dbf8dcb49195f24a9621f81bcb4a98c,
       type: 2}

@@ -22,6 +22,14 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    public void pauseToggleActive(){
+
+            pauseDisplay = !pauseDisplay;
+            pauseUI.SetActive(pauseDisplay);
+            float time = pauseDisplay ? 0f : 1f;
+            Time.timeScale = time;
+    }
+
 
     /*
 

@@ -8,10 +8,11 @@ public class scenemanager : MonoBehaviour
    public bool isMenu = false;
    public bool isIntro = false;
    public bool isEnd = false;
+   public bool isCredits = false;
 
      void Update()
     {
-        if (Input.anyKey && isMenu)
+        if (Input.GetKeyDown(KeyCode.JoystickButton0) && isMenu)
         {
             StartIntro();
         }
@@ -22,6 +23,11 @@ public class scenemanager : MonoBehaviour
         }
 
         if (Input.anyKey && isEnd)
+        {
+            startCredits();
+        }
+
+        if (Input.anyKey && isCredits)
         {
             MainMenu();
         }
@@ -38,6 +44,10 @@ public class scenemanager : MonoBehaviour
     public void StartIntro(){
         SceneManager.LoadScene(4);
     }
+    public void startCredits(){
+        SceneManager.LoadScene(3);
+    }
+
     public void EndGame()
     {
         Application.Quit();
