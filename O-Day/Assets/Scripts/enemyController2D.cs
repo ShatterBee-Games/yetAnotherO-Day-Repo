@@ -124,13 +124,14 @@ public class enemyController2D : MonoBehaviour
 
     float currentSafeTime = 3.0f;
 
-    // [SerializeField, Tooltip("center music")]
-    // AudioClip centerMusic;
+    public AudioClip impact;
+    public AudioSource audio;
 
 
     void Awake()
     {
         cameraShaker = Shake.GetComponent<CameraShaker>();
+        audio = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -251,10 +252,12 @@ public class enemyController2D : MonoBehaviour
     }
 
     public void TakeDamage(float damage)
-    {
+    {   
+        audio.PlayOneShot(impact, 1F);
         health -= damage;
         healthjuice.fillAmount = health / healthMax;
         Debug.Log(health);
+        
     }
 
     public void SpawnStomp()

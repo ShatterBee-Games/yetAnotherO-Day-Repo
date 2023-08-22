@@ -10,11 +10,17 @@ public class scenemanager : MonoBehaviour
    public bool isEnd = false;
    public bool isCredits = false;
 
+    Animator anim;
+
+    void Start(){
+        anim = GetComponent<Animator>();
+    }
+
      void Update()
     {
         if (Input.GetKeyDown(KeyCode.JoystickButton0) && isMenu)
         {
-            StartIntro();
+            clickedIntro();
         }
 
         if (Input.anyKey && isIntro)
@@ -53,5 +59,9 @@ public class scenemanager : MonoBehaviour
         Application.Quit();
     }
 
+    public void clickedIntro(){
+        anim.SetTrigger("startIntro");
+    }
 
+    
 }

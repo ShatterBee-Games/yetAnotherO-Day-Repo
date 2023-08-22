@@ -66,6 +66,13 @@ public class CharacterController2D : MonoBehaviour
 
     [SerializeField, Tooltip("reload time")]
     float reloadTimeerMax = 1.5f;
+    
+    public AudioClip damage;
+    public AudioSource audio;
+    public AudioClip charge;
+
+
+    
 
     // added coyote Jump and Jump buffer -zoe
 
@@ -84,7 +91,7 @@ public class CharacterController2D : MonoBehaviour
     float damageTime;
 
     [SerializeField, Tooltip("Immortality after damage taken time")]
-    float damageTimeMax = 1.0f;
+    float damageTimeMax = 1.5f;
 
     private void Awake()
     {
@@ -109,6 +116,9 @@ public class CharacterController2D : MonoBehaviour
         bulletCounter bulletUI = GetComponent<bulletCounter>();
         bulletUI.bullets = bulletCount;
         // bulletUI.reloadBar.enabled = false;
+
+        audio = GetComponent<AudioSource>();
+
     }
 
     // chnaged from Update to FixedUpdate -zoe
@@ -145,7 +155,8 @@ public class CharacterController2D : MonoBehaviour
         }
 
         if (reloadTimer > 0f)
-        {
+        {   
+            
             reloadTimer -= Time.deltaTime;
             bulletCounter bulletUI = GetComponent<bulletCounter>();
             bulletUI.progress = reloadTimer / reloadTimeerMax;
@@ -213,6 +224,7 @@ public class CharacterController2D : MonoBehaviour
             else
             {
                 healthController.health--;
+                audio.PlayOneShot(damage, 1F);
             }
         }
     }
@@ -248,6 +260,7 @@ public class CharacterController2D : MonoBehaviour
             if (bulletCount <= 0)
             {
                 reloadTimer = reloadTimeerMax;
+                audio.PlayOneShot(charge, 1F);
                 // bulletUI.reloadBar.enabled = true;
             }
         }
