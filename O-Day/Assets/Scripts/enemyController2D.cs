@@ -278,7 +278,7 @@ public class enemyController2D : MonoBehaviour
             );
             Rigidbody2D stomp = stompGameObject.GetComponent<Rigidbody2D>();
             float xspeed;
-            xspeed = 5.0f;
+            xspeed = 9.0f;
             stomp.velocity = new Vector2(xspeed, 0.0f);
             enemyStomp stompcode = stompGameObject.GetComponent<enemyStomp>();
             stompcode.initPosition = stomp.position;
