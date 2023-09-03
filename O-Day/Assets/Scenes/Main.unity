@@ -6881,7 +6881,7 @@ PrefabInstance:
     - target: {fileID: 9047503468690831621, guid: 100f470a2103fb043b05cb42fa3cad1e,
         type: 3}
       propertyPath: attackTimerMax
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 9047503468690831621, guid: 100f470a2103fb043b05cb42fa3cad1e,
         type: 3}
@@ -9279,7 +9279,7 @@ MonoBehaviour:
   damage: {fileID: 8300000, guid: 24dc6de3a27d5464b871b58135eec252, type: 3}
   audio: {fileID: 1533137398}
   charge: {fileID: 8300000, guid: 41508fdb67805634a818120342bd22e6, type: 3}
-  damageTimeMax: 0.5
+  damageTimeMax: 0.7
 --- !u!50 &1533137393
 Rigidbody2D:
   serializedVersion: 4
@@ -9313,8 +9313,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a36e037fba871146b2235dc9201f877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 4
-  numOfHearts: 4
+  health: 5
+  numOfHearts: 5
   heartArray:
   - {fileID: 1888992407}
   - {fileID: 454463909}

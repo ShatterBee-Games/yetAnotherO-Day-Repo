@@ -7,6 +7,8 @@ public class CharacterController2D : MonoBehaviour
 {
     Controls _controls;
 
+    SpriteRenderer sprite;
+
     public Animator m_Animator;
 
     CameraShaker cameraShaker;
@@ -120,6 +122,8 @@ public class CharacterController2D : MonoBehaviour
 
         audio = GetComponent<AudioSource>();
 
+        sprite = GetComponentInChildren<SpriteRenderer>();
+
     }
 
     // chnaged from Update to FixedUpdate -zoe
@@ -153,6 +157,10 @@ public class CharacterController2D : MonoBehaviour
         if (damageTime > 0f)
         {
             damageTime -= Time.deltaTime;
+        }
+        else
+        {
+            sprite.material.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         }
 
         if (reloadTimer > 0f)
@@ -226,6 +234,7 @@ public class CharacterController2D : MonoBehaviour
             {
                 healthController.health--;
                 audio.PlayOneShot(damage, 1F);
+                sprite.material.color = new Color(1.0f, 0.0f, 1.0f, 1.0f);
             }
         }
     }
