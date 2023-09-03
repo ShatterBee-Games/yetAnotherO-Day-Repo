@@ -101,6 +101,7 @@ public class CharacterController2D : MonoBehaviour
         _controls = new Controls();
         m_Animator.SetBool("Facing_Right", facingRight);
         m_Animator.SetBool("isRunning", running);
+        m_Animator.SetBool("Grounded", isGrounded);
 
         _controls.Player.Shoot.performed += ctx => Onfire();
 
