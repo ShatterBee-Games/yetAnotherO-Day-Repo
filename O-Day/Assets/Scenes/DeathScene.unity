@@ -251,6 +251,7 @@ MonoBehaviour:
   isMenu: 0
   isIntro: 0
   isEnd: 0
+  isCredits: 0
 --- !u!1 &133270260
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,7 +717,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 116358614}
         m_TargetAssemblyTypeName: scenemanager, Assembly-CSharp
-        m_MethodName: EndGame
+        m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
