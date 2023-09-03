@@ -6950,12 +6950,12 @@ PrefabInstance:
     - target: {fileID: 9047503468690831621, guid: 100f470a2103fb043b05cb42fa3cad1e,
         type: 3}
       propertyPath: rightSwap
-      value: 64
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 9047503468690831621, guid: 100f470a2103fb043b05cb42fa3cad1e,
         type: 3}
       propertyPath: centerSwap
-      value: 37
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 9047503468690831621, guid: 100f470a2103fb043b05cb42fa3cad1e,
         type: 3}
