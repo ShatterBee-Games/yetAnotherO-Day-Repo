@@ -93,16 +93,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db261ed09f1bf754da40a23e4dafe010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
   stompPrefab: {fileID: 0}
   projectilePrefab: {fileID: 0}
   laserPrefab: {fileID: 0}
-  listStompPosition: []
-  listProjectileLocation: []
+  vomitPrefab: {fileID: 0}
+  Shake: {fileID: 0}
+  attackModes: []
+  rightSwap: 140
+  centerSwap: 80
+  bossSprites: []
   laserTopLocation: {fileID: 0}
   laserBottomLocation: {fileID: 0}
   playerPosition: {fileID: 0}
   bulletsToSpawnMax: 3
   bulletTimerMax: 0.5
+  vomitBulletTimerMax: 0.1
+  vomitAttackTimerMax: 2
   attackTimerMax: 6
   attackTimerMin: 1.6
+  healthjuice: {fileID: 0}
+  healthMax: 200
+  health: 200
+  musicController: {fileID: 0}
+  leftSafe: 0
+  rightSafe: 1
+  centerSafe: 2
+  impact: {fileID: 0}
+  audio: {fileID: 0}

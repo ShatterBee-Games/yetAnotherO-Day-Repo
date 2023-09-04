@@ -10,16 +10,29 @@ public class CharacterController2D : MonoBehaviour
     SpriteRenderer sprite;
 
     public Animator m_Animator;
+    private string currentState;
+
+    ////////////////ANIMATION STATES////////////////////
+
+    const string FACING_LEFT = "Facing_left";
+    const string FACING_RIGHT = "Facing_right";
+    const string RUNNING_LEFT = "Run_Left";
+    const string RUNNING_RIGHT = "Run_right";
+    const string JUMPING_LEFT = "Jump_Left";
+    const string JUMPING_RIGHT = "Jump_right";
+
+    ////////////////////////////////////////////////////
 
     CameraShaker cameraShaker;
-    [SerializeField] GameObject Shake;
+
+    [SerializeField]
+    GameObject Shake;
 
     [SerializeField, Tooltip("Max speed, in units per second, that the character moves.")]
     float speed = 20;
 
     [SerializeField, Tooltip("Prefab for bullet")]
     GameObject playerBulletPrefab;
-
 
     // zoe - ///////////////////////////////////////////
 
@@ -68,13 +81,10 @@ public class CharacterController2D : MonoBehaviour
 
     [SerializeField, Tooltip("reload time")]
     float reloadTimeerMax = 1.5f;
-    
+
     public AudioClip damage;
     public AudioSource audio;
     public AudioClip charge;
-
-
-    
 
     // added coyote Jump and Jump buffer -zoe
 
@@ -101,10 +111,6 @@ public class CharacterController2D : MonoBehaviour
         extraJumps = extraJumpValue;
 
         _controls = new Controls();
-        m_Animator.SetBool("Facing_Right", facingRight);
-        m_Animator.SetBool("isRunning", running);
-        m_Animator.SetBool("Grounded", isGrounded);
-
         _controls.Player.Shoot.performed += ctx => Onfire();
 
         // added Rigidbody2D as rb for more ctrl? -zoe
@@ -123,7 +129,17 @@ public class CharacterController2D : MonoBehaviour
         audio = GetComponent<AudioSource>();
 
         sprite = GetComponentInChildren<SpriteRenderer>();
+    }
 
+    void ChangeAnimationState(string newState)
+    {
+        //stop the same animation from interrupting  itself
+        if (currentState == newState)
+            return;
+        //play animation
+        m_Animator.Play(newState);
+        // reassign the currentstate;
+        currentState = newState;
     }
 
     // chnaged from Update to FixedUpdate -zoe
@@ -135,9 +151,6 @@ public class CharacterController2D : MonoBehaviour
 
         //use GetAxisRaw for more Snappy movement if desired -zoe
         moveInput = Input.GetAxis("Horizontal");
-        m_Animator.SetFloat("moveinput", moveInput);
-
-        m_Animator.SetBool("isRunning", running);
 
         running = moveInput != 0;
 
@@ -149,7 +162,6 @@ public class CharacterController2D : MonoBehaviour
         {
             Flip();
         }
- 
     }
 
     void Update()
@@ -162,10 +174,27 @@ public class CharacterController2D : MonoBehaviour
         {
             sprite.material.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         }
+        
+        //DO ANIMATIONS -zoe
+        if (running)
+        {
+            ChangeAnimationState(
+                isGrounded
+                    ? (facingRight ? RUNNING_RIGHT : RUNNING_LEFT)
+                    : (facingRight ? JUMPING_RIGHT : JUMPING_LEFT)
+            );
+        }
+        else
+        {
+            ChangeAnimationState(
+                isGrounded
+                    ? (facingRight ? FACING_RIGHT : FACING_LEFT)
+                    : (facingRight ? JUMPING_RIGHT : JUMPING_LEFT)
+            );
+        }
 
         if (reloadTimer > 0f)
-        {   
-            
+        {
             reloadTimer -= Time.deltaTime;
             bulletCounter bulletUI = GetComponent<bulletCounter>();
             bulletUI.progress = reloadTimer / reloadTimeerMax;
@@ -211,7 +240,7 @@ public class CharacterController2D : MonoBehaviour
     void Flip()
     {
         facingRight = !facingRight;
-        m_Animator.SetBool("Facing_Right", facingRight);
+
         /*
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
@@ -220,7 +249,7 @@ public class CharacterController2D : MonoBehaviour
 
     void ProcessDamage()
     {
-        if (damageTime <= 0 )
+        if (damageTime <= 0)
         {
             damageTime = damageTimeMax;
             Debug.Log("fuck");
