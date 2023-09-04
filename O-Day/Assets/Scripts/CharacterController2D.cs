@@ -169,6 +169,12 @@ public class CharacterController2D : MonoBehaviour
         if (damageTime > 0f)
         {
             damageTime -= Time.deltaTime;
+            if (damageTime <0.3f){
+                sprite.material.color = new Color(1.0f, (1.0f - (damageTime/0.3f)) , 1.0f, 1.0f);
+            }
+            else if (damageTime <0.6f){
+                sprite.material.color = new Color(1.0f, ((damageTime -0.3f)*3f), 1.0f, 1.0f);
+            }
         }
         else
         {
