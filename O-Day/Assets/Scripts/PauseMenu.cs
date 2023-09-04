@@ -21,11 +21,11 @@ public class PauseMenu : MonoBehaviour
 
             if (pauseDisplay)
             {
-                AudioManager.instance.TurnDownAllAudio();
+                AudioListener.pause = true;
             }
             else
             {
-                AudioManager.instance.RestoreAudioVolumes();
+                AudioListener.pause = false;
             }
         }
     }
@@ -39,11 +39,11 @@ public class PauseMenu : MonoBehaviour
 
         if (pauseDisplay)
         {
-            AudioManager.instance.TurnDownAllAudio();
+            AudioListener.pause = true;
         }
         else
-        {
-            AudioManager.instance.RestoreAudioVolumes();
+        {   
+            AudioListener.pause = false;
         }
     }
 
